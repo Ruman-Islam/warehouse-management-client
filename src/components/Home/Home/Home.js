@@ -1,9 +1,12 @@
 import React from 'react';
+import Inventory from '../../Inventory/Inventory';
+import Banner from '../Banner/Banner';
 
 const Home = () => {
     return (
         <div>
-            <h1 className='text-8xl text-center text-indigo-600'>This is Home</h1>
+            <Banner />
+            <Inventory />
         </div>
     );
 };
