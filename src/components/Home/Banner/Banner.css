@@ -1,10 +1,15 @@
-.review-content-wrapper .slider-wrapper .slide.active {
+.active {
     opacity: 1;
-    transition-duration: 1s ease;
+    transition-duration: 1s ease-in;
+    animation-name: design;
+    animation-duration: 2s;
 }
 
-.review-content-wrapper .slider-wrapper .slide{
-    opacity: 0;
-    transition-duration: 1s;
-    transform: scale(1.08);
+@keyframes design {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
 }

@@ -21,7 +21,7 @@ const Navbar = () => {
                 </div>
             </nav>
             <nav className='nav nav-bottom text-white'>
-                <ul className={`flex flex-col md:flex-row justify-center items-center py-2 w-full h-18 md:h-20 lg:h-14 absolute md:static ease-in duration-300 ${openNav ? 'top-20 nav' : 'top-[-200px]'}`}>
+                <ul className={`flex flex-col md:flex-row justify-center items-center py-2 w-full h-18 md:h-20 lg:h-14 absolute md:static ease-in duration-300 z-10 ${openNav ? 'top-20 nav' : 'top-[-200px]'}`}>
                     <li className='px-5 text-lg'>Home</li>
                     <li className='px-5 text-lg'>Inventory</li>
                     <li className='px-5 text-lg'>My Items</li>

@@ -22,14 +22,16 @@ const Banner = () => {
         return null;
     }
     return (
-        <div className='w-full'>
-            <div className='flex relative'>
-                <button className='text-3xl text-white absolute left-5 top-0 bottom-0' onClick={prevSlide}>
-                    <AiOutlineDoubleLeft className='arrow' />
-                </button>
+        <div className='w-full flex relative'>
+            <button className='text-3xl text-black absolute left-5 top-0 bottom-0 z-10' onClick={prevSlide}>
+                <div className='bg-opacity-10 bg-slate-500 px-2 py-5'>
+                    <AiOutlineDoubleLeft />
+                </div>
+            </button>
+            <>
                 {slides.map((img, index) => {
                     return (
-                        <div className={index === current ? 'duration-300 ease-in opacity-100' : 'opacity-0 scale-75'} key={index}>
+                        <div className={index === current ? 'active' : ''} key={index}>
                             {index === current && (
                                 <div className='bg-cover bg-center'>
                                     <img className='w-full' src={img} alt="" />
@@ -38,10 +40,12 @@ const Banner = () => {
                         </div>
                     )
                 })}
-                <button className='text-3xl text-white absolute right-5 top-0 bottom-0' onClick={nextSlide}>
-                    <AiOutlineDoubleRight className='arrow' />
-                </button>
-            </div>
+            </>
+            <button className='text-3xl text-black absolute right-5 top-0 bottom-0 z-10' onClick={nextSlide}>
+                <div className='bg-opacity-10 bg-slate-500 px-2 py-5'>
+                    <AiOutlineDoubleRight />
+                </div>
+            </button>
         </div>
     );
 };
