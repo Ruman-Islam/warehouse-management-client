@@ -23,8 +23,8 @@ const Banner = () => {
     }
     return (
         <div className='w-full flex relative'>
-            <button className='text-3xl text-black absolute left-5 top-0 bottom-0 z-10' onClick={prevSlide}>
-                <div className='bg-opacity-10 bg-slate-500 px-2 py-5'>
+            <button className='text-lg md:text-3xl text-black absolute left-1 top-0 bottom-0 z-10' onClick={prevSlide}>
+                <div className='bg-opacity-10 bg-slate-500 px-1 md:px-2 py-2 md:py-5'>
                     <AiOutlineDoubleLeft />
                 </div>
             </button>
@@ -41,8 +41,8 @@ const Banner = () => {
                     )
                 })}
             </>
-            <button className='text-3xl text-black absolute right-5 top-0 bottom-0 z-10' onClick={nextSlide}>
-                <div className='bg-opacity-10 bg-slate-500 px-2 py-5'>
+            <button className='text-lg md:text-3xl text-black absolute right-1 top-0 bottom-0 z-10' onClick={nextSlide}>
+                <div className='bg-opacity-10 bg-slate-500 px-1 md:px-2 py-2 md:py-5'>
                     <AiOutlineDoubleRight />
                 </div>
             </button>
