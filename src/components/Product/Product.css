@@ -19,3 +19,9 @@
     bottom: 0;
     transform: translateY(200px);
 }
+
+@media only screen and (max-width: 1080px) {
+    .upper-part .bottom-part {
+        height: 70%;
+    }
+}
