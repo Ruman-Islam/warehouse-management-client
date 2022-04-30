@@ -2,17 +2,21 @@ import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-fireb
 import { AiOutlineMail, AiOutlineUnlock, AiOutlineUser } from "react-icons/ai";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../Firebase/Firebase.config';
 import Spinner from '../Shared/Spinner/Spinner';
 
 const Registration = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
     const notify = (message) => {
         toast.warn(message, {
             position: toast.POSITION.TOP_CENTER
         });
     }
-    const navigate = useNavigate();
+
     const [
         createUserWithEmailAndPassword,
         emailUser,
@@ -48,7 +52,7 @@ const Registration = () => {
         return <Spinner />
     }
     if (emailUser) {
-        console.log(emailUser);
+        navigate(from, { replace: true });
     }
 
     return (

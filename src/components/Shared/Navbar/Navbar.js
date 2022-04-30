@@ -23,7 +23,7 @@ const Navbar = () => {
                             :
                             <li onClick={() => navigate('/login')} className='text-lg cursor-pointer'>Login</li>
                         }
-                        <li onClick={() => navigate('/registration')} className='text-lg cursor-pointer'>Signup</li>
+                        {user ? '' : <li onClick={() => navigate('/registration')} className='text-lg cursor-pointer'>Signup</li>}
                         <li><AiFillSetting /> </li>
                     </ul>
                 </div>

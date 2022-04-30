@@ -70,14 +70,18 @@ const Login = () => {
                         </div>
                         <input className='border border-l-0 w-full p-3 text-xs my-2 outline-0' type="password" placeholder='Password' name="password" />
                     </div>
-                    <small className='text-center text-slate-500'>Forgot your <span className='primary-color'>Password?</span></small>
+                    <small
+                        className='text-center text-slate-500'>
+                        Forgot your
+                        <span className='primary-color cursor-pointer'> Password?</span>
+                    </small>
                     <input className='background-color text-white mt-5 py-2 cursor-pointer' type="submit" value="Log in" />
                 </form>
-                <small className='text-center text-slate-500 cursor-pointer'>
+                <small className='text-center text-slate-500'>
                     No account?
                     <span
                         onClick={() => navigate('/registration')}
-                        className='primary-color'>
+                        className='primary-color cursor-pointer'>
                         <span> Create one here</span>
                     </span>
                 </small>
