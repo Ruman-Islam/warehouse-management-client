@@ -23,10 +23,10 @@ const Navbar = () => {
             </nav>
             <nav className='nav nav-bottom text-white'>
                 <ul className={`flex flex-col md:flex-row justify-center items-center py-2 w-full h-18 md:h-20 lg:h-14 absolute md:static ease-in duration-300 z-10 ${openNav ? 'top-20 nav' : 'top-[-200px]'}`}>
-                    <li className='px-5 text-lg'><CustomLink to='/home'>Home</CustomLink></li>
-                    <li className='px-5 text-lg'><CustomLink to='/inventory'>Inventory</CustomLink></li>
-                    <li className='px-5 text-lg'><CustomLink to='/myItems'>My Items</CustomLink></li>
-                    <li className='px-5 text-lg'><CustomLink to='/settings'>Settings</CustomLink></li>
+                    <li className='px-5 text-md font-bold'><CustomLink to='/home'>Home</CustomLink></li>
+                    <li className='px-5 text-md font-bold'><CustomLink to='/inventory'>Inventory</CustomLink></li>
+                    <li className='px-5 text-md font-bold'><CustomLink to='/myItems'>My Items</CustomLink></li>
+                    <li className='px-5 text-md font-bold'><CustomLink to='/settings'>Settings</CustomLink></li>
                 </ul>
             </nav>
         </header>

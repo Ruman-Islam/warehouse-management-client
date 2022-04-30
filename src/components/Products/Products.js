@@ -6,21 +6,25 @@ import Spinner from '../Shared/Spinner/Spinner';
 const Products = ({ isHome }) => {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [changeState, setChangeState] = useState(false);
 
     useEffect(() => {
+        const url = "http://localhost:5000/products";
         setIsLoading(true);
         (async () => {
             try {
-                const url = "http://localhost:5000/products";
                 const { data } = await axios.get(url)
                 setProducts(data.products);
                 setIsLoading(false);
-            } catch (error) {
-                console.log(error);
+            } catch (err) {
+                if (err.response.status === 404) {
+                    console.log(err.response.status);
+                }
+                setChangeState(true);
                 setIsLoading(false);
             }
         })()
-    }, [])
+    }, [changeState])
 
     return (
         <>

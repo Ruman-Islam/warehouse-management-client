@@ -8,6 +8,10 @@
     --primary-color: #00254B;
 }
 
+.primary-color{
+    color: var(--primary-color);
+}
+
 .background-color {
     background: var(--primary-color);
 }
