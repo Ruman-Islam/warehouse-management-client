@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../Firebase/Firebase.config';
 import Spinner from '../Shared/Spinner/Spinner';
+import SocialLogin from './SocialLogin';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -16,6 +17,7 @@ const Login = () => {
             position: toast.POSITION.TOP_CENTER
         });
     }
+
     const [
         signInWithEmailAndPassword,
         user,
@@ -52,8 +54,8 @@ const Login = () => {
     }
 
     return (
-        <div className='w-full flex flex-col justify-center items-center  h-[80vh]'>
-            <div className='w-5/6 md:w-1/5 rounded-lg shadow-xl h-4/6 md:h-3/6 flex flex-col mx-auto border p-2'>
+        <div className='w-full flex flex-col justify-center items-center h-[80vh]'>
+            <div className='w-5/6 md:w-1/5 rounded-lg shadow-xl h-4/5 md:h-3/5 flex flex-col mx-auto border p-2'>
                 <h1 className='text-center text-xl mt-2 primary-color font-semibold'>LOGIN</h1>
                 <form
                     onSubmit={handleLogin}
@@ -85,6 +87,7 @@ const Login = () => {
                         <span> Create one here</span>
                     </span>
                 </small>
+                <SocialLogin />
             </div>
         </div>
     );
