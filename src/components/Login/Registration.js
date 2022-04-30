@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../Firebase/Firebase.config';
 import Spinner from '../Shared/Spinner/Spinner';
+import SocialLogin from './SocialLogin';
 
 const Registration = () => {
     const navigate = useNavigate();
@@ -56,8 +57,8 @@ const Registration = () => {
     }
 
     return (
-        <div className='w-full flex flex-col justify-center items-center  h-[80vh]'>
-            <div className='w-5/6 md:w-1/5 rounded-lg shadow-xl h-5/6 md:h-3/5 flex flex-col mx-auto border p-2'>
+        <div className='w-full flex flex-col justify-center items-center h-[80vh]'>
+            <div className='w-5/6 md:w-1/5 rounded-lg shadow-xl h-6/6 flex flex-col mx-auto border py-5'>
                 <h1 className='text-center text-xl mt-2 primary-color font-semibold'>SIGN UP</h1>
                 <form
                     onSubmit={handleRegistration}
@@ -97,6 +98,7 @@ const Registration = () => {
                         <span> Login</span>
                     </span>
                 </small>
+                <SocialLogin />
             </div>
         </div>
     );

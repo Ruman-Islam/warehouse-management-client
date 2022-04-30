@@ -8,23 +8,27 @@ import PrivateRoute from './components/Login/PrivateRoute';
 import Registration from './components/Login/Registration';
 import './App.css';
 import { ToastContainer } from 'react-toastify';
+import Footer from './components/Shared/Footer/Footer';
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/home' element={<Home />} />
-        <Route path='/inventory' element={<Inventory />} />
-        <Route path='/inventoryDetail/:productId' element={
-          <PrivateRoute>
-            <InventoryDetail />
-          </PrivateRoute>
-        } />
-        <Route path='/login' element={<Login />} />
-        <Route path='/registration' element={<Registration />} />
-      </Routes>
+    <div className="App page-container">
+      <div className='content-wrap'>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/home' element={<Home />} />
+          <Route path='/inventory' element={<Inventory />} />
+          <Route path='/inventoryDetail/:productId' element={
+            <PrivateRoute>
+              <InventoryDetail />
+            </PrivateRoute>
+          } />
+          <Route path='/login' element={<Login />} />
+          <Route path='/registration' element={<Registration />} />
+        </Routes>
+      </div>
+      <Footer />
       <ToastContainer />
     </div>
   );
