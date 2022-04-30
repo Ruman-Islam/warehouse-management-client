@@ -1,36 +1,54 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { AiOutlineMail, AiOutlineUnlock } from "react-icons/ai";
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import auth from '../../Firebase/Firebase.config';
+import Spinner from '../Shared/Spinner/Spinner';
 
 const Login = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
     const notify = (message) => {
         toast.warn(message, {
             position: toast.POSITION.TOP_CENTER
         });
     }
+    const [
+        signInWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useSignInWithEmailAndPassword(auth);
+
     const handleLogin = e => {
         e.preventDefault();
-        const name = e.target.name.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
-        const confirmPassword = e.target.confirmPassword.value;
         if (email === '') {
-            notify('Provide your name');
-        } else if (email === '') {
-            notify('Provide your email');
+            notify('Enter email');
         } else if (password === '') {
             notify('Provide a password');
-        } else if (!(confirmPassword === password)) {
-            notify('Password mismatch');
         } else {
-            createUserWithEmailAndPassword(email, password)
-                .then(async (res) => {
-                    await updateProfile({ displayName: name })
-                    notify('Account created successfully');
-                })
+            signInWithEmailAndPassword(email, password)
         }
+    }
+
+    useEffect(() => {
+        if (error) {
+            const err = (error.message.split('/')[1]);
+            const errorMessage = err.split(")")[0];
+            if (errorMessage) { notify(errorMessage); }
+        }
+    }, [error])
+
+    if (loading) {
+        return <Spinner />
+    }
+    if (user) {
+        navigate(from, { replace: true });
     }
 
     return (

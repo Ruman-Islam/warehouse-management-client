@@ -1,3 +1,4 @@
+import { signOut } from 'firebase/auth';
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { AiOutlineUser, AiFillSetting, AiOutlineAlignLeft, AiFillCaretUp } from "react-icons/ai";
@@ -18,7 +19,10 @@ const Navbar = () => {
                     <h1 className='text-2xl md:text-3xl lg:text-4xl'>Warehouse</h1>
                     <ul className='flex text-xl md:text-2xl w-64 justify-evenly items-center'>
                         {user ? <li className='text-sm'>{user.displayName}</li> : <li><AiOutlineUser /></li>}
-                        <li onClick={() => navigate('/login')} className='text-lg cursor-pointer'>Login</li>
+                        {user ? <li onClick={() => signOut(auth)} className='text-lg cursor-pointer'>Logout</li>
+                            :
+                            <li onClick={() => navigate('/login')} className='text-lg cursor-pointer'>Login</li>
+                        }
                         <li onClick={() => navigate('/registration')} className='text-lg cursor-pointer'>Signup</li>
                         <li><AiFillSetting /> </li>
                     </ul>
