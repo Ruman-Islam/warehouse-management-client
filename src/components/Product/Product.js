@@ -7,6 +7,7 @@ import './Product.css';
 
 const Product = ({ product }) => {
     const { _id, img, productName, price, quantity, review, supplier } = product;
+    console.log('from product', product);
     const navigate = useNavigate();
     return (
         <div className='py-4'>

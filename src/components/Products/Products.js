@@ -25,16 +25,16 @@ const Products = ({ isHome }) => {
             }
         })()
     }, [changeState])
-
+    console.log(products);
     return (
         <>
             {isLoading ? <Spinner />
                 :
                 <div className='w-2/3 grid grid-cols-1 md:grid-cols-3 gap-y-12 mx-auto'>
                     {isHome ?
-                        products.slice(0, 6).map(product => <Product key={product._id} product={product} />)
+                        products?.slice(0, 6).map(product => <Product key={product._id} product={product} />)
                         :
-                        products.map(product => <Product key={product._id} product={product} />)
+                        products?.map(product => <Product key={product._id} product={product} />)
                     }
                 </div>
             }
