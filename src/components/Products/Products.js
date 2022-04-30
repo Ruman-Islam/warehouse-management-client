@@ -9,7 +9,7 @@ const Products = ({ isHome }) => {
     const [changeState, setChangeState] = useState(false);
 
     useEffect(() => {
-        const url = "http://localhost:5000/products";
+        const url = "https://protected-waters-02155.herokuapp.com/products";
         setIsLoading(true);
         (async () => {
             try {
@@ -19,26 +19,35 @@ const Products = ({ isHome }) => {
             } catch (err) {
                 if (err.response.status === 404) {
                     console.log(err.response.status);
+                    setChangeState(!changeState);
+                    setIsLoading(false);
                 }
-                setChangeState(true);
-                setIsLoading(false);
             }
         })()
     }, [changeState])
     console.log(products);
     return (
-        <>
-            {isLoading ? <Spinner />
-                :
-                <div className='w-2/3 grid grid-cols-1 md:grid-cols-3 gap-y-12 mx-auto'>
-                    {isHome ?
-                        products?.slice(0, 6).map(product => <Product key={product._id} product={product} />)
-                        :
-                        products?.map(product => <Product key={product._id} product={product} />)
-                    }
-                </div>
-            }
-        </>
+        // <>
+        //     {isLoading ? <Spinner />
+        //         :
+        //         <div className='w-2/3 grid grid-cols-1 md:grid-cols-3 gap-y-12 mx-auto'>
+        //             {isHome ?
+        //                 products?.slice(0, 6).map(product => <Product key={product._id} product={product} />)
+        //                 :
+        //                 products?.map(product => <Product key={product._id} product={product} />)
+        //             }
+        //         </div>
+        //     }
+        // </>
+        <div>
+            {<div className='w-2/3 grid grid-cols-1 md:grid-cols-3 gap-y-12 mx-auto'>
+                {isHome ?
+                    products?.slice(0, 6).map(product => <Product key={product._id} product={product} />)
+                    :
+                    products?.map(product => <Product key={product._id} product={product} />)
+                }
+            </div>}
+        </div>
     );
 };
 
