@@ -23,9 +23,9 @@ const SocialLogin = () => {
 
     useEffect(() => {
         if (googleError || facebookError) {
-            const err = (googleError.message.split('/')[1]) || (googleError.message.split('/')[1]);
+            const err = (googleError?.message.split('/')[1]) || (facebookError?.message.split('/')[1]);
             const errorMessage = err.split(")")[0];
-            if (errorMessage) { notify(errorMessage); }
+            if (errorMessage) { notify(errorMessage) }
         }
     }, [googleError, facebookError])
 
