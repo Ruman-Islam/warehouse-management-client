@@ -10,5 +10,16 @@
     },
     {
         "img": "https://i0.wp.com/www.dadabhai.shop/wp-content/uploads/2020/10/20201023_004241_0000.png?fit=600%2C600&ssl=1"
+    },
+    {
+        "productName": "hello",
+        "price": 452,
+        "quantity": 10,
+        "description": "Nam tempus turpis at metus scelerisque placerat nulla deumantos solici...",
+        "supplier": "Green Zone",
+        "availability": "yes",
+        "reviews": 5,
+        "tags": ["Blue", "Gray", "Pink", "White"],
+        "img": "https://i.ibb.co/dQvmRc5/today-is-a-good-day-framed-poster.jpg"
     }
 ]

@@ -10,11 +10,11 @@ const ManageInventory = () => {
             <aside className='w-80 py-8 sidebar text-center flex flex-col sticky'>
                 <div className='flex flex-col my-5'>
                     <div className='bg-white w-full'>
-                        <div className='grid grid-cols-2 items-center mx-auto w-4/5 my-2'>
-                            <span className='pl-16'><AiOutlineHome /></span>
+                        <div className='flex items-center mx-auto w-5/5 my-2'>
+                            <span className='pl-10 flex-1'><AiOutlineHome /></span>
                             <button
                                 onClick={() => navigate('/home')}
-                                className='cursor-pointer primary-color text-left'
+                                className='cursor-pointer primary-color text-left flex-auto'
                             >HOME
                             </button>
                         </div>
