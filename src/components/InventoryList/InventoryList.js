@@ -62,7 +62,7 @@ const InventoryList = () => {
     }
 
     return (
-        <div className="py-5">
+        <div id='inventory-details' className="py-5">
             <>
                 {isLoading ? <Spinner />
                     :

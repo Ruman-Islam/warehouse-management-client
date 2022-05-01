@@ -9,7 +9,6 @@ const TopSellingProducts = () => {
         (async () => {
             try {
                 const { data } = await axios.get(url)
-                console.log(data);
                 setProducts(data);
             } catch (err) {
                 console.log(err);

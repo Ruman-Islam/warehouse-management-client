@@ -15,6 +15,7 @@ const Inventories = ({ isHome }) => {
             try {
                 const { data } = await axios.get(url)
                 setProducts(data.products);
+                console.log(data.products);
                 setIsLoading(false);
             } catch (err) {
                 if (err.response.status === 404) {
@@ -29,11 +30,11 @@ const Inventories = ({ isHome }) => {
     return (
         <div>
             <div className='mt-5 py-5'>
-                <div className="text-center text-sm mb-10">
+                {isHome && <div className="text-center text-sm mb-10">
                     <h1 className='text-center text-4xl mb-2'>Inventories</h1>
                     <p className="text-slate-600 leading-5">A lots of inventories is stored in this please. Managing them by your hand with your own choice.</p>
                     <p className="text-slate-600">There are many inventories, here is showing some of them.</p>
-                </div>
+                </div>}
                 <div className="py-5">
                     <>
                         {isLoading ? <Spinner />

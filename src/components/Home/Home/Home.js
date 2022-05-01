@@ -1,11 +1,11 @@
 import React from 'react';
 import { AiOutlineDoubleRight } from "react-icons/ai";
 import Inventories from '../../Inventories/Inventories';
-import TopSellers from '../../TopSellers/TopSellers';
-import TopSellingProducts from '../TopSellingProducts/TopSellingProducts';
 import Banner from '../Banner/Banner';
 import About from '../About/About';
 import { useNavigate } from 'react-router-dom';
+import TopSellers from '../TopSellers/TopSellers';
+import TopSellingProducts from '../TopSellingProducts/TopSellingProducts';
 // import Navbar from '../../Shared/Navbar/Navbar';
 
 const Home = () => {

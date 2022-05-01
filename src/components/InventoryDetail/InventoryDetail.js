@@ -3,12 +3,13 @@ import Rating from 'react-rating';
 import React, { useEffect, useState } from 'react';
 import { AiFillCheckSquare, AiFillCloseSquare, AiOutlineDoubleRight } from "react-icons/ai";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
 import Spinner from '../Shared/Spinner/Spinner';
 
 const InventoryDetail = () => {
+    const navigate = useNavigate();
     const { productId } = useParams();
     const [product, setProduct] = useState({});
     const [isLoading, setIsLoading] = useState(false);
@@ -29,12 +30,13 @@ const InventoryDetail = () => {
             return;
         }
         if (quantity > 0 || inputQuantity) {
-            newQuantity = isUpdate ? inputQuantity : quantity - 1;
+            newQuantity = isUpdate ? inputQuantity + quantity : quantity - 1;
             const url = `http://localhost:5000/product/${id}`;
             (async () => {
                 try {
                     const { data } = await axios.put(url, { newQuantity })
                     if (data.success) setQuantity(newQuantity);
+                    notify("Stocked successfully")
                 } catch (err) {
                     console.log(err);
                 }
@@ -116,8 +118,12 @@ const InventoryDetail = () => {
                             </form>
                             <div className='w-full md:w-2/4 ml-auto text-center md:text-right'>
                                 <button
+                                    onClick={() => navigate('/manageInventory')}
                                     className='text-blue-800 text-sm'>
-                                    <div className='flex justify-end items-center'> <AiOutlineDoubleRight /><span>Manage Inventories</span></div>
+                                    <div className='flex justify-end items-center'>
+                                        <AiOutlineDoubleRight />
+                                        <span>Manage Inventories</span>
+                                    </div>
                                 </button>
                             </div>
                         </div>
