@@ -6,7 +6,7 @@ import addressIcon from '../../../assets/images/icon_address.webp';
 const Footer = () => {
     const year = new Date().getFullYear();
     return (
-        <div>
+        <div className='bg-slate-100'>
             <div className='background-color text-white flex flex-col md:flex-row justify-around items-center px-44 py-8 md:py-4'>
                 <div className='flex items-center flex-col md:flex-row'>
                     <div className='w-20 text-6xl ml-5 md:ml-0'><AiOutlineMail /></div>
@@ -27,8 +27,8 @@ const Footer = () => {
                 </div>
             </div>
             <div className='flex flex-col md:flex-row justify-around px-16 md:px-28 py-5 md:py-20'>
-                <div className='md:w-1/4 w-fit mb-5 md:mb-0'>
-                    <h1 className='primary-color text-center md:text-left text-3xl font-bold'>Warehouse</h1>
+                <div className='md:w-1/4 w-full mb-5 md:mb-0'>
+                    <h1 className='primary-color text-center md:text-left text-3xl font-extrabold'>Warehouse</h1>
                     <div className='flex flex-col md:flex-row justify-between items-center my-5'>
                         <div>
                             <img src={supportIcon} alt="" />
@@ -50,19 +50,19 @@ const Footer = () => {
                 </div>
                 <div className='text-center md:text-left mb-5 md:mb-0'>
                     <h1 className='font-bold text-xl'>CUSTOMER SERVICE</h1>
-                    <p className='my-1 hover:text-sky-600 cursor-pointer duration-200'>Contact us</p>
-                    <p className='my-1 hover:text-sky-600 cursor-pointer duration-200'>Help and advice</p>
-                    <p className='my-1 hover:text-sky-600 cursor-pointer duration-200'>Shipping & Returns</p>
-                    <p className='my-1 hover:text-sky-600 cursor-pointer duration-200'>Terms and conditions</p>
-                    <p className='my-1 hover:text-sky-600 cursor-pointer duration-200'>Refund Policy</p>
+                    <p className='my-1 hover:text-sky-600 cursor-pointer duration-200 text-sm'>Contact us</p>
+                    <p className='my-1 hover:text-sky-600 cursor-pointer duration-200 text-sm'>Help and advice</p>
+                    <p className='my-1 hover:text-sky-600 cursor-pointer duration-200 text-sm'>Shipping & Returns</p>
+                    <p className='my-1 hover:text-sky-600 cursor-pointer duration-200 text-sm'>Terms and conditions</p>
+                    <p className='my-1 hover:text-sky-600 cursor-pointer duration-200 text-sm'>Refund Policy</p>
                 </div>
                 <div className='text-center md:text-left'>
                     <h1 className='font-bold text-xl'>ABOUT US</h1>
-                    <p className='my-1 hover:text-sky-600 cursor-pointer duration-200'>Who We Are ?</p>
-                    <p className='my-1 hover:text-sky-600 cursor-pointer duration-200'>Corporate Responsibility</p>
-                    <p className='my-1 hover:text-sky-600 cursor-pointer duration-200'>Bangladesh Laws</p>
-                    <p className='my-1 hover:text-sky-600 cursor-pointer duration-200'>Careers</p>
-                    <p className='my-1 hover:text-sky-600 cursor-pointer duration-200'>Privacy Policy</p>
+                    <p className='my-1 hover:text-sky-600 cursor-pointer duration-200 text-sm'>Who We Are ?</p>
+                    <p className='my-1 hover:text-sky-600 cursor-pointer duration-200 text-sm'>Corporate Responsibility</p>
+                    <p className='my-1 hover:text-sky-600 cursor-pointer duration-200 text-sm'>Bangladesh Laws</p>
+                    <p className='my-1 hover:text-sky-600 cursor-pointer duration-200 text-sm'>Careers</p>
+                    <p className='my-1 hover:text-sky-600 cursor-pointer duration-200 text-sm'>Privacy Policy</p>
                 </div>
             </div>
             <div className='flex px-2 py-5 justify-center md:justify-start text-xs md:px-64 flex-wrap border'>

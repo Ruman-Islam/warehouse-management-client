@@ -48,7 +48,7 @@ const InventoryDetail = () => {
             {isLoading ? <Spinner />
                 :
                 <div>
-                    <div className='grid grid-cols-2 w-2/3 mx-auto mt-16'>
+                    <div className='grid grid-cols-2 w-2/3 mx-auto my-20'>
                         <div className='border border-slate-200 rounded'>
                             <img className='w-full' src={product.img} alt="" />
                         </div>

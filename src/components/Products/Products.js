@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import Product from '../Product/Product';
+import Product from './Product';
 import Spinner from '../Shared/Spinner/Spinner';
 
 const Products = ({ isHome }) => {

@@ -1,0 +1,38 @@
+.seller-info-card {
+    position: relative;
+    opacity: 1;
+    cursor: pointer;
+}
+
+.seller-info-card:hover::after {
+    opacity: 1;
+    transition: all .9s ease;
+}
+
+.seller-info-card::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.705);
+    opacity: 0;
+}
+
+.seller-info-card .seller-detail {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    bottom: 50%;
+    opacity: 0;
+}
+
+.seller-info-card:hover .seller-detail {
+    opacity: 1;
+    transition: all .9s ease;
+    z-index: 50;
+}
