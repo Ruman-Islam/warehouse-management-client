@@ -24,15 +24,19 @@
 
 .seller-info-card .seller-detail {
     position: absolute;
-    top: 50%;
+    top: 0;
+    bottom: 150px;
     left: 0;
     right: 0;
-    bottom: 50%;
     opacity: 0;
+    z-index: -1;
+    transform: translateY(200px);
+    overflow: hidden;
 }
 
 .seller-info-card:hover .seller-detail {
     opacity: 1;
     transition: all .9s ease;
     z-index: 50;
+    transform: translateY(150px);
 }

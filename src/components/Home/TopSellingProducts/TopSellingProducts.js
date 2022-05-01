@@ -20,9 +20,9 @@ const TopSellingProducts = () => {
         <div className='w-2/3 my-20 mx-auto'>
             <h1 className='text-4xl text-center'>Top Selling Inventories</h1>
             <p className='text-center text-sm my-5 leading-3'>Changes every month keeps tracking.</p>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mx-auto w-full gap-y-2'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mx-auto w-full gap-y-2 gap-x-2'>
                 {products?.map(product =>
-                    <div className='shadow-lg'
+                    <div className='shadow-lg hover:-translate-y-2 duration-300'
                         key={product._id}>
                         <img className='w-full h-full' src={product.img} alt="" />
                     </div>

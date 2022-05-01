@@ -21,7 +21,7 @@ const TopSeller = ({ seller }) => {
                     fullSymbol={<FontAwesomeIcon icon={faStar} />}
                     readonly>
                 </Rating>
-                <button className='block mx-auto mt-5 bg-sky-700 px-10 py-2 rounded-sm'>View Detail</button>
+                <button className='block mx-auto mt-5 bg-sky-700 px-10 py-2 rounded-sm hover:bg-sky-800'>View Detail</button>
             </div>
         </div >
     );

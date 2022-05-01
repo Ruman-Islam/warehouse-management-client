@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Spinner from '../Shared/Spinner/Spinner';
+import { toast } from 'react-toastify';
 
 const InventoryDetail = () => {
     const { productId } = useParams();
@@ -13,9 +14,22 @@ const InventoryDetail = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [quantity, setQuantity] = useState(0);
 
-    const handleQuantity = (id) => {
-        if (quantity > 0) {
-            const newQuantity = quantity - 1;
+    const notify = (message) => {
+        toast.warn(message, {
+            position: toast.POSITION.TOP_CENTER
+        });
+    }
+
+    const handleQuantity = (e, id, isUpdate) => {
+        e.preventDefault();
+        let newQuantity;
+        const inputQuantity = +(e.target?.quantity?.value);
+        if (inputQuantity < 0) {
+            notify("Input positive value!");
+            return;
+        }
+        if (quantity > 0 || inputQuantity) {
+            newQuantity = isUpdate ? inputQuantity : quantity - 1;
             const url = `http://localhost:5000/product/${id}`;
             (async () => {
                 try {
@@ -26,6 +40,7 @@ const InventoryDetail = () => {
                 }
             })()
         }
+        isUpdate && e.target.reset();
     }
 
     useEffect(() => {
@@ -48,14 +63,14 @@ const InventoryDetail = () => {
             {isLoading ? <Spinner />
                 :
                 <div>
-                    <div className='grid grid-cols-2 w-2/3 mx-auto my-20'>
+                    <div className='grid grid-cols-1 md:grid-cols-2 w-2/3 mx-auto my-20'>
                         <div className='border border-slate-200 rounded'>
                             <img className='w-full' src={product.img} alt="" />
                         </div>
                         <div className='px-6'>
-                            <h1 className='text-2xl font-semibold'>{product.productName}</h1>
+                            <h1 className='text-2xl font-semibold text-center md:text-left'>{product.productName}</h1>
                             <Rating
-                                className='text-xs text-amber-400 my-5'
+                                className='text-xs text-amber-400 my-5 ml-20 md:ml-0'
                                 initialRating={product.review}
                                 emptySymbol={<FontAwesomeIcon icon={faStar} />}
                                 fullSymbol={<FontAwesomeIcon icon={faStar} />}
@@ -74,20 +89,32 @@ const InventoryDetail = () => {
                             )}
                             </p>
                             <p className='flex text-xs'><span className='mr-20'>ID :</span> <span>{product._id}</span></p>
-                            <p className='text-4xl font-extrabold my-5 primary-color'>{'$'}{product.price}</p>
-                            <p className='font-semibold'><span>SUPPLIER - </span>{product.supplier}</p>
-                            <p className='text-slate-500'>{product.description}</p>
-                            <div className='flex justify-between items-center my-2 md:my-5'>
-                                <span className='flex text-xl md:text-2xl'>
-                                    <p className='mr-2'>Quantity :</p>
-                                    <p>{quantity}</p>
-                                </span>
-                                <button
-                                    onClick={() => handleQuantity(product._id)}
-                                    className='text-white font-semibold px-20 py-2 rounded text-2xl background-color'>
-                                    Deliver
-                                </button>
+                            <p className='text-4xl font-extrabold my-5 primary-color text-center md:text-left'>{'$'}{product.price}</p>
+                            <div className='flex flex-col'>
+                                <div className='order-2 md:order-1 text-center md:text-left'>
+                                    <p className='font-semibold'><span>SUPPLIER - </span>{product.supplier}</p>
+                                    <p className='text-slate-500'>{product.description}</p>
+                                </div>
+                                <div
+                                    className='flex flex-col md:flex-row justify-between items-center my-2 md:my-5 order-1 md:order-2 mb-10 md:mb-0'>
+                                    <span className='flex text-xl md:text-2xl'>
+                                        <p className='mr-2 text-2xl md:text-3xl'>Quantity :</p>
+                                        <p className='text-2xl md:text-3xl'>{quantity}</p>
+                                    </span>
+                                    <button
+                                        onClick={(e) => handleQuantity(e, product._id, false)}
+                                        className='text-white mt-5 md:mt-0 px-10 md:px-16 py-1 rounded text-md md:text-2xl background-color hover:bg-blue-900 duration-300'>
+                                        Deliver
+                                    </button>
+                                </div>
                             </div>
+                            <form onSubmit={(e) => handleQuantity(e, product._id, true)}
+                                className='my-0 md:my-5 p-5'>
+                                <input type="number" placeholder='Number' name='quantity' className='border outline-0 p-2 rounded-md mt-5 w-full' />
+                                <input type="submit" value="Re-Stock" className='bg-slate-500 hover:bg-slate-600 duration-300 text-white px-5 py-1 mt-2 rounded-md cursor-pointer' />
+                                <small className='block text-slate-500 mt-4'>You can re-stock your product here. Put the quantity you want then hit the Re-Stock button. Remember you won't be able to put negative value or text.</small>
+                            </form>
+                            <button className='w-full md:w-2/3 flex justify-center border mx-auto decoration-black'>Manage Inventories</button>
                         </div>
                     </div>
                 </div>}
