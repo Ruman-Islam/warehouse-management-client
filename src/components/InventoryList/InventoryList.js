@@ -31,7 +31,7 @@ const InventoryList = () => {
                     :
                     <table className='table-fixed w-11/12 mx-auto'>
                         <thead>
-                            <tr>
+                            <tr className='h-16'>
                                 <th>PRODUCT NAME</th>
                                 <th>ID</th>
                                 <th>QUANTITY</th>
@@ -40,13 +40,14 @@ const InventoryList = () => {
                         </thead>
                         <tbody>
                             {products.map(product =>
-                                <tr key={product._id} className='background-color text-white text-center border rounded-md'>
+                                <tr key={product._id}
+                                    className='h-16 primary-color text-center border border-l-0 border-r-0 border-t-0 rounded-md'>
                                     <td>{product.productName}</td>
                                     <td>{product._id}</td>
                                     <td>{product.quantity}</td>
                                     <td>
                                         <button
-                                            className='px-10 py-0 rounded-md my-2 bg-red-700 hover:bg-red-600'>
+                                            className='px-10 py-0 rounded-md my-2 bg-red-700 hover:bg-red-600 text-white'>
                                             Delete
                                         </button>
                                     </td>

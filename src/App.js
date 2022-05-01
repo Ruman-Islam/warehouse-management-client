@@ -9,9 +9,11 @@ import Footer from './components/Shared/Footer/Footer';
 import NotFound from './components/NotFound/NotFound';
 import Home from './components/Home/Home/Home';
 import Login from './components/Login/Login';
-import './App.css';
 import Inventories from './components/Inventories/Inventories';
 import InventoryList from './components/InventoryList/InventoryList';
+import AddItem from './components/ManageInventory/AddItem';
+import MyItems from './components/ManageInventory/MyItems';
+import './App.css';
 
 function App() {
   return (
@@ -21,7 +23,6 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/home' element={<Home />} />
-          <Route path='/inventories' element={<Inventories />} />
           <Route path='/inventoryDetail/:productId' element={
             <PrivateRoute>
               <InventoryDetail />
@@ -32,7 +33,11 @@ function App() {
               <ManageInventory />
             </PrivateRoute>
           }>
-            <Route path='inventories' element={<InventoryList />} />
+            <Route index element={<InventoryList />} />
+            <Route path='/manageInventory/inventory-list' element={<InventoryList />} />
+            <Route path='/manageInventory/inventories' element={<Inventories />} />
+            <Route path='/manageInventory/add-item' element={<AddItem />} />
+            <Route path='/manageInventory/my-items' element={<MyItems />} />
           </Route>
           <Route path='/login' element={<Login />} />
           <Route path='/registration' element={<Registration />} />

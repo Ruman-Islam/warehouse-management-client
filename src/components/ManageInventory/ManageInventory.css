@@ -1,5 +1,6 @@
 .sidebar {
-    background: url('../../assets/images/sidebar_background_by_munsteh_d5egfwb-fullview.jpg');
+    background: url('../../assets/images/download.jpg');
     background-repeat: no-repeat;
     background-position: center;
+    background-size: cover;
 }
