@@ -1,5 +1,5 @@
-header .nav, .toggle-icon {
-    background: #00254B;
+header .nav{
+    background: var(--primary-color);
 }
 
 /* header .nav-bottom {

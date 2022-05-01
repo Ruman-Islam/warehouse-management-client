@@ -1,12 +1,12 @@
 import axios from 'axios';
 import Rating from 'react-rating';
-import { AiFillCheckSquare, AiFillCloseSquare } from "react-icons/ai";
-import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from 'react';
+import { AiFillCheckSquare, AiFillCloseSquare, AiOutlineDoubleRight } from "react-icons/ai";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams } from 'react-router-dom';
-import Spinner from '../Shared/Spinner/Spinner';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
+import Spinner from '../Shared/Spinner/Spinner';
 
 const InventoryDetail = () => {
     const { productId } = useParams();
@@ -114,7 +114,12 @@ const InventoryDetail = () => {
                                 <input type="submit" value="Re-Stock" className='bg-slate-500 hover:bg-slate-600 duration-300 text-white px-5 py-1 mt-2 rounded-md cursor-pointer' />
                                 <small className='block text-slate-500 mt-4'>You can re-stock your product here. Put the quantity you want then hit the Re-Stock button. Remember you won't be able to put negative value or text.</small>
                             </form>
-                            <button className='w-full md:w-2/3 flex justify-center border mx-auto decoration-black'>Manage Inventories</button>
+                            <div className='w-full md:w-2/4 ml-auto text-center md:text-right'>
+                                <button
+                                    className='text-blue-800 text-sm'>
+                                    <div className='flex justify-end items-center'> <AiOutlineDoubleRight /><span>Manage Inventories</span></div>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>}
