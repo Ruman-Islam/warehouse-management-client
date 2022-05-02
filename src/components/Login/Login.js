@@ -7,6 +7,7 @@ import auth from '../../Firebase/Firebase.config';
 import Spinner from '../Shared/Spinner/Spinner';
 import SocialLogin from './SocialLogin';
 import PageTitle from '../Shared/PageTitle/PageTitle';
+import axios from 'axios';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -51,6 +52,10 @@ const Login = () => {
         return <Spinner />
     }
     if (user) {
+        (async () => {
+            const { data } = await axios.post('https://protected-waters-02155.herokuapp.com/login', { email: user.user?.email })
+            localStorage.setItem('accessToken', data);
+        })();
         navigate(from, { replace: true });
     }
 

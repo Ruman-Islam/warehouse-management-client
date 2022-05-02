@@ -36,7 +36,9 @@ const SocialLogin = () => {
 
     if (googleUser || facebookUser) {
         (async () => {
-            const { data } = await axios.post('https://protected-waters-02155.herokuapp.com/login', { email: googleUser.user?.email })
+            const { data } = await axios.post('https://protected-waters-02155.herokuapp.com/login', {
+                email: (googleUser ? googleUser.user?.email : facebookUser.user?.email)
+            })
             localStorage.setItem('accessToken', data);
         })();
         navigate(from, { replace: true });

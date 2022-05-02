@@ -35,8 +35,8 @@ const MyItems = () => {
                 setProducts(data.products);
                 setIsLoading(false);
             } catch (err) {
-                setIsLoading(false);
-                if (err.response.status === 401 || err.response.status === 403) {
+                console.log(err);
+                if (err.response.status === 403 || err.response.status === 401) {
                     setIsLoading(false);
                     signOut(auth);
                     navigate('/login');
