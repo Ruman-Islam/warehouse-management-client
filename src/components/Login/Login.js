@@ -26,7 +26,7 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
-    const handleLogin = e => {
+    const handleLogin = async e => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;

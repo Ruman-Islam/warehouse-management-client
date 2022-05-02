@@ -6,6 +6,7 @@ import facebookLogo from '../../assets/images/facebook-logo.png';
 import Spinner from '../Shared/Spinner/Spinner';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const SocialLogin = () => {
     const navigate = useNavigate();
@@ -25,15 +26,19 @@ const SocialLogin = () => {
         if (googleError || facebookError) {
             const err = (googleError?.message.split('/')[1]) || (facebookError?.message.split('/')[1]);
             const errorMessage = err.split(")")[0];
-            if (errorMessage) { notify(errorMessage) }
+            if (errorMessage) { notify(errorMessage) };
         }
     }, [googleError, facebookError])
 
     if (googleLoading || facebookLoading) {
-        return <Spinner SocialLogin />
+        return <Spinner SocialLogin />;
     }
 
     if (googleUser || facebookUser) {
+        (async () => {
+            const { data } = await axios.post('http://localhost:5000/login', { email: googleUser.user?.email })
+            localStorage.setItem('accessToken', data);
+        })();
         navigate(from, { replace: true });
     }
 

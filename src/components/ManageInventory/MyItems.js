@@ -1,6 +1,8 @@
 import axios from 'axios';
+import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import swal from 'sweetalert';
 import auth from '../../Firebase/Firebase.config';
@@ -11,6 +13,7 @@ const MyItems = () => {
     const [user, ,] = useAuthState(auth);
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
 
     const notify = (message) => {
         toast.warn(message, {
@@ -24,14 +27,23 @@ const MyItems = () => {
         const url = `http://localhost:5000/products-user?email=${email}`;
         (async () => {
             try {
-                const { data } = await axios.get(url)
+                const { data } = await axios.get(url, {
+                    headers: {
+                        authorization: `accessKey ${localStorage.getItem('accessToken')}`
+                    }
+                })
                 setProducts(data.products);
                 setIsLoading(false);
             } catch (err) {
-                console.log(err);
+                setIsLoading(false);
+                if (err.response.status === 401 || err.response.status === 403) {
+                    setIsLoading(false);
+                    signOut(auth);
+                    navigate('/login');
+                }
             }
         })()
-    }, [])
+    }, [user?.email, navigate])
 
     const handleDelete = async productId => {
         const url = `http://localhost:5000/delete-product/${productId}`
@@ -75,7 +87,7 @@ const MyItems = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {products.map(product =>
+                            {products?.map(product =>
                                 <tr key={product._id}
                                     className='h-16 primary-color text-center border border-l-0 border-r-0 border-t-0 rounded-md'>
                                     <td>{product.productName}</td>

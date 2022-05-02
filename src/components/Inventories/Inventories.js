@@ -7,7 +7,6 @@ import Spinner from "../Shared/Spinner/Spinner";
 const Inventories = ({ isHome }) => {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [changeState, setChangeState] = useState(false);
 
     useEffect(() => {
         const url = "http://localhost:5000/products";
@@ -20,12 +19,11 @@ const Inventories = ({ isHome }) => {
             } catch (err) {
                 if (err.response.status === 404) {
                     console.log(err.response.status);
-                    setChangeState(!changeState);
                     setIsLoading(false);
                 }
             }
         })()
-    }, [changeState])
+    }, [])
 
     return (
         <div>

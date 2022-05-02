@@ -26,5 +26,6 @@
 - React icons
 - Sweet alert
 - Toastify
+- JWT
 - Helmet
 - Font Awesome
