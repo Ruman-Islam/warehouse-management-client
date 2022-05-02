@@ -6,6 +6,7 @@
 
 :root {
     --primary-color: #00254B;
+    --active-link-color: orange;
 }
 
 .primary-color{
@@ -17,10 +18,10 @@
 }
 
 .page-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
 }
 .content-wrap {
-    flex: 1;
+    flex: 1 !important;
 }

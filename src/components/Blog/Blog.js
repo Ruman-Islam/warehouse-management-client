@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from '../Shared/Footer/Footer';
 import Navbar from '../Shared/Navbar/Navbar';
 import PageTitle from '../Shared/PageTitle/PageTitle';
 
@@ -7,7 +8,7 @@ const Blog = () => {
         <div>
             <PageTitle title="Blog" />
             <Navbar />
-            <div className='w-4/5 mx-auto'>
+            <div className='w-4/5 mx-auto h-[80vh] mb-72 md:mb-0'>
                 <div className='my-5'>
                     <h1 className='text-xl font-semibold'>Difference between JavaScript vs NodeJS</h1>
                     <ul>
@@ -37,6 +38,7 @@ const Blog = () => {
                     </ul>
                 </div>
             </div>
+            <div><Footer /></div>
         </div>
     );
 };

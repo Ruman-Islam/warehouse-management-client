@@ -1,0 +1,40 @@
+.sidebar-full-screen, .sidebar-small-screen {
+    background: url('../../../assets/images/download.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.inner-container {
+    color: white;
+    width: 100%;
+    margin:  0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+}
+.inner-container .icon, .button {
+    font-size: 16px;
+}
+
+.inner-container .icon {
+    flex-basis: 20%;
+    display: flex;
+   font-size: 20px;
+   justify-content: center;
+}
+.inner-container .button {
+    flex-basis: 60%;
+    text-align: start;
+}
+
+.active-link {
+    color: var(--active-link-color);
+}
+
+@media only screen and (max-width: 576px) {
+    .sidebar-full-screen {
+        display: none !important;
+    }
+}

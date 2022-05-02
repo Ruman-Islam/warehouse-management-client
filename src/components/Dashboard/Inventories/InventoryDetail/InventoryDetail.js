@@ -6,8 +6,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate, useParams } from 'react-router-dom';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
-import Spinner from '../Shared/Spinner/Spinner';
-import Navbar from '../Shared/Navbar/Navbar';
+import Spinner from '../../../Shared/Spinner/Spinner';
+import Navbar from '../../../Shared/Navbar/Navbar';
+import Footer from '../../../Shared/Footer/Footer';
 
 const InventoryDetail = () => {
     const navigate = useNavigate();
@@ -26,18 +27,20 @@ const InventoryDetail = () => {
         e.preventDefault();
         let newQuantity;
         const inputQuantity = +(e.target?.quantity?.value);
+        const currentQuantity = +quantity;
+        console.log(inputQuantity, quantity);
         if (inputQuantity < 0) {
             notify("Input positive value!");
             return;
         }
         if (quantity > 0 || inputQuantity) {
-            newQuantity = isUpdate ? inputQuantity + quantity : quantity - 1;
+            newQuantity = isUpdate ? inputQuantity + currentQuantity : currentQuantity - 1;
             const url = `https://protected-waters-02155.herokuapp.com/product/${id}`;
             (async () => {
                 try {
                     const { data } = await axios.put(url, { newQuantity })
                     if (data.success) setQuantity(newQuantity);
-                    notify("Stocked successfully")
+                    notify(`${isUpdate ? 'Stock update successfully' : 'Deliverd successfully'}`)
                 } catch (err) {
                     console.log(err);
                 }
@@ -67,7 +70,7 @@ const InventoryDetail = () => {
             {isLoading ? <Spinner />
                 :
                 <div>
-                    <div className='grid grid-cols-1 md:grid-cols-2 w-2/3 mx-auto my-20'>
+                    <div className='grid grid-cols-1 md:grid-cols-2 w-2/3 mx-auto my-10 md:my-20'>
                         <div className='border border-slate-200 rounded'>
                             <img className='w-full' src={product.img} alt="" />
                         </div>
@@ -131,6 +134,7 @@ const InventoryDetail = () => {
                         </div>
                     </div>
                 </div>}
+            <Footer />
         </>
     );
 };

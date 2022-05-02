@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Spinner from '../Shared/Spinner/Spinner';
+import Spinner from '../../../Shared/Spinner/Spinner';
 import { toast } from 'react-toastify';
 import swal from 'sweetalert';
 
@@ -67,10 +67,10 @@ const InventoryList = () => {
                 {isLoading ? <Spinner />
                     :
                     <table className='table-fixed w-11/12 mx-auto'>
-                        <thead>
-                            <tr className='h-16'>
+                        <thead className='border'>
+                            <tr className='h-16 text-xs md:text-lg'>
                                 <th>PRODUCT NAME</th>
-                                <th>ID</th>
+                                <th className='hidden md:block md:mt-5'>ID</th>
                                 <th>QUANTITY</th>
                                 <th>ACTION</th>
                             </tr>
@@ -80,7 +80,7 @@ const InventoryList = () => {
                                 <tr key={product._id}
                                     className='h-16 primary-color text-center border border-l-0 border-r-0 border-t-0 rounded-md'>
                                     <td className='text-left'>{product.productName}</td>
-                                    <td>{product._id}</td>
+                                    <td className='hidden md:block md:mt-5'>{product._id}</td>
                                     <td>{product.quantity}</td>
                                     <td>
                                         <button

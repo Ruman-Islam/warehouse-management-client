@@ -7,22 +7,22 @@ import './Banner.css';
 
 const Banner = () => {
     return (
-        <div className='flex h-[80vh] justify-center items-center w-4/5 mx-auto mb-20'>
-            <div className='relative basis-3/6 pl-36'>
-                <div><img src={img3} alt="" /></div>
-                <div className='absolute top-20 md:top-96 left-[-10px]'><img src={img2} alt="" /></div>
+        <div className='flex flex-col md:flex-row h-[80vh] justify-center items-center w-4/5 mx-auto mb-20'>
+            <div className='relative basis-3/6 md:mt-0 hidden md:block'>
+                <div className="flex justify-end md:w-3/4"><img className="w-full md:w-3/4" src={img3} alt="" /></div>
+                <div className='md:absolute top-0 md:top-72 md:left-10'><img className="w-2/3 md:w-full" src={img2} alt="" /></div>
             </div>
-            <div className='basis-3/6'>
+            <div className='basis-3/6 mt-20 md:mt-0'>
                 <div>
                     <div className='flex items-center text-3xl text-red-500'>
                         <AiOutlineDoubleRight />
                         <h2 className='pl-5 my-5 font-bold'>ABOUT US</h2>
                     </div>
-                    <h1 className='text-5xl leading-tight my-5'>We are trusted &amp; professional logistic company</h1>
+                    <h1 className='text-5xl leading-tight my-2 md:my-5'>We are trusted &amp; professional logistic company</h1>
                     <p>The Shelter is one of the trusted online gadgets warehouse in Bangladesh. SBD is all about world class electronic warehouse. We provide electronic and Gadgets warehouse facilities. We provide delivery within 24-48 hours throughout the whole Bangladesh.</p>
                 </div>
-                <div className='flex my-10 py-10 justify-around w-full'>
-                    <div className='flex basis-3/6 items-center'>
+                <div className='flex my-10 py-10 justify-around w-full flex-col md:flex-row'>
+                    <div className='flex basis-3/6 items-center mb-10 md:mb-0'>
                         <div className='text-6xl basis-1/6 pr-5 text-red-500'>
                             <FontAwesomeIcon icon={faHeadset} />
                         </div>

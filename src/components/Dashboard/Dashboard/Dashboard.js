@@ -1,20 +1,20 @@
+import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { useState } from 'react';
-import Sidebar from '../Dashboard/Sidebar/Sidebar';
-import PageTitle from '../Shared/PageTitle/PageTitle';
-import './ManageInventory.css';
+// import ManageInventory from '../../ManageInventory/ManageInventory';
+import PageTitle from '../../Shared/PageTitle/PageTitle';
+import Sidebar from '../Sidebar/Sidebar';
 
-const ManageInventory = () => {
+const Dashboard = () => {
     const [openNav, setOpenNav] = useState(false);
     return (
         <div className='flex flex-col md:flex-row'>
             <PageTitle title="Manage Inventory" />
             <Sidebar openNav={openNav} setOpenNav={setOpenNav} />
-            <div className={`w-full ${openNav ? 'mt-36' : 'mt-0 '} duration-300`}>
+            <div className={`w-full ${openNav ? 'mt-44' : 'mt-0 '} duration-300`}>
                 <Outlet />
             </div>
         </div>
     );
 };
 
-export default ManageInventory;
+export default Dashboard;

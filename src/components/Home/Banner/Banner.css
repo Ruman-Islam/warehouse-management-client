@@ -5,6 +5,12 @@
     animation-duration: 2s;
 }
 
+.topper {
+    border: black 1px solid;
+    height: 100%;
+    margin-top: 800px;
+}
+
 @keyframes design {
     0%{
         opacity: 0;

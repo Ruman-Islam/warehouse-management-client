@@ -1,10 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Product from "../Product/Product";
-import PageTitle from "../Shared/PageTitle/PageTitle";
-import Spinner from "../Shared/Spinner/Spinner";
+import { useLocation } from "react-router-dom";
+import Product from "../../../Product/Product";
+import Footer from "../../../Shared/Footer/Footer";
+import Navbar from "../../../Shared/Navbar/Navbar";
+import PageTitle from "../../../Shared/PageTitle/PageTitle";
+import Spinner from "../../../Shared/Spinner/Spinner";
 
 const Inventories = ({ isHome }) => {
+    const location = useLocation();
+    console.log(location.pathname);
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -26,7 +31,8 @@ const Inventories = ({ isHome }) => {
     }, [])
 
     return (
-        <div>
+        <>
+            {location.pathname === '/inventories' && <Navbar />}
             <div className='mt-5 py-5'>
                 <PageTitle title="Inventory" />
                 {isHome && <div className="text-center text-sm mb-10">
@@ -48,8 +54,9 @@ const Inventories = ({ isHome }) => {
                         }
                     </>
                 </div>
-            </div>
-        </div>
+            </div> <br /><br /><br /><br />
+            {location.pathname === '/inventories' && <Footer />}
+        </>
     );
 };
 
