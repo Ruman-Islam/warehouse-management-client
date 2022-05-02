@@ -15,7 +15,6 @@ const Inventories = ({ isHome }) => {
             try {
                 const { data } = await axios.get(url)
                 setProducts(data.products);
-                console.log(data.products);
                 setIsLoading(false);
             } catch (err) {
                 if (err.response.status === 404) {
