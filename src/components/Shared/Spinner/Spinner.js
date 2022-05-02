@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Spinner = () => {
+const Spinner = ({ SocialLogin }) => {
     return (
 
-        <div className='flex h-[50vh] justify-center items-center'>
+        <div className={`flex ${SocialLogin ? 'h-[10vh]' : 'h-[50vh]'} justify-center items-center`}>
             <button
                 type='button'
                 className='inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white transition ease-in-out duration-150 cursor-not-allowed background-color'

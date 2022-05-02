@@ -57,7 +57,7 @@ const Registration = () => {
     }
 
     return (
-        <div className='w-full flex flex-col justify-center items-center h-[80vh]'>
+        <div className='w-full flex flex-col justify-center items-center h-[100vh]'>
             <div className='w-5/6 md:w-1/5 rounded-lg shadow-xl h-6/6 flex flex-col mx-auto border py-5'>
                 <h1 className='text-center text-xl mt-2 primary-color font-semibold'>SIGN UP</h1>
                 <form
@@ -100,6 +100,7 @@ const Registration = () => {
                 </small>
                 <SocialLogin />
             </div>
+            <button onClick={() => navigate('/home')} className='mt-10 text-xl hover:text-blue-800'>Back To Home</button>
         </div>
     );
 };

@@ -4,15 +4,17 @@ import {
     AiOutlineFileAdd,
     AiOutlineOrderedList,
     AiOutlineTag,
-    AiTwotoneAppstore
+    AiTwotoneAppstore,
+    AiOutlineLogout
 } from "react-icons/ai";
 import './ManageInventory.css';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../Firebase/Firebase.config';
+import photoPlaceHolder from '../../assets/images/photoplaceholder.jpg';
+import { signOut } from 'firebase/auth';
 
 const ManageInventory = () => {
     const location = useLocation()
-    console.log(location.pathname);
     const [user, ,] = useAuthState(auth);
     const navigate = useNavigate();
     return (
@@ -21,7 +23,9 @@ const ManageInventory = () => {
                 <div className='flex flex-col my-5'>
                     {user?.email &&
                         <div className='inner-container'>
-                            <div className='icon'> <img className='w-8 h-8 rounded-full' src={user?.photoURL} alt="" /></div>
+                            <div className='icon'>
+                                <img className='w-8 h-8 rounded-full' src={user?.photoURL ? user?.photoURL : photoPlaceHolder} alt="" />
+                            </div>
                             <div className='button'>
                                 <span
                                 >{user?.displayName}
@@ -76,6 +80,17 @@ const ManageInventory = () => {
                                     onClick={() => navigate('/manageInventory/my-items')}
                                     className={location.pathname === '/manageInventory/my-items' && 'active-link'}
                                 >My Items
+                                </button>
+                            </div>
+                        </div>}
+                    {user?.email &&
+                        <div className='inner-container'>
+                            <div className='icon'><AiOutlineLogout /></div>
+                            <div className='button'>
+                                <button
+                                    onClick={() => signOut(auth) + navigate('/home')}
+                                    className='text-lg font-semibold'
+                                >Logout
                                 </button>
                             </div>
                         </div>}

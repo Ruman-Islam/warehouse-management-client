@@ -79,7 +79,7 @@ const InventoryList = () => {
                             {products.map(product =>
                                 <tr key={product._id}
                                     className='h-16 primary-color text-center border border-l-0 border-r-0 border-t-0 rounded-md'>
-                                    <td>{product.productName}</td>
+                                    <td className='text-left'>{product.productName}</td>
                                     <td>{product._id}</td>
                                     <td>{product.quantity}</td>
                                     <td>

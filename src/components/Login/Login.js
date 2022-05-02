@@ -54,7 +54,7 @@ const Login = () => {
     }
 
     return (
-        <div className='w-full flex flex-col justify-center items-center h-[80vh]'>
+        <div className='w-full flex flex-col justify-center items-center h-full mt-44'>
             <div className='w-5/6 md:w-1/5 rounded-lg shadow-xl h-4/5 md:h-3/5 flex flex-col mx-auto border p-2'>
                 <h1 className='text-center text-xl mt-2 primary-color font-semibold'>LOGIN</h1>
                 <form
@@ -89,6 +89,7 @@ const Login = () => {
                 </small>
                 <SocialLogin />
             </div>
+            <button onClick={() => navigate('/home')} className='mt-10 text-xl hover:text-blue-800'>Back To Home</button>
         </div>
     );
 };

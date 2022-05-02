@@ -4,8 +4,8 @@ import InventoryDetail from './components/InventoryDetail/InventoryDetail';
 import ManageInventory from './components/ManageInventory/ManageInventory';
 import Registration from './components/Login/Registration';
 import PrivateRoute from './components/Login/PrivateRoute';
-import Navbar from './components/Shared/Navbar/Navbar';
-import Footer from './components/Shared/Footer/Footer';
+// import Navbar from './components/Shared/Navbar/Navbar';
+// import Footer from './components/Shared/Footer/Footer';
 import NotFound from './components/NotFound/NotFound';
 import Home from './components/Home/Home/Home';
 import Login from './components/Login/Login';
@@ -14,12 +14,13 @@ import InventoryList from './components/InventoryList/InventoryList';
 import AddItem from './components/ManageInventory/AddItem';
 import MyItems from './components/ManageInventory/MyItems';
 import './App.css';
+import Blog from './components/Blog/Blog';
 
 function App() {
   return (
     <div className="App page-container">
       <div className='content-wrap'>
-        <Navbar />
+        {/* <Navbar /> */}
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/home' element={<Home />} />
@@ -41,10 +42,11 @@ function App() {
           </Route>
           <Route path='/login' element={<Login />} />
           <Route path='/registration' element={<Registration />} />
+          <Route path='/blog' element={<Blog />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </div>
-      <Footer />
+      {/* <Footer /> */}
       <ToastContainer />
     </div>
   );

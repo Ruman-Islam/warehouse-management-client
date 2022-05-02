@@ -30,7 +30,7 @@ const SocialLogin = () => {
     }, [googleError, facebookError])
 
     if (googleLoading || facebookLoading) {
-        return <Spinner />
+        return <Spinner SocialLogin />
     }
 
     if (googleUser || facebookUser) {
@@ -38,7 +38,7 @@ const SocialLogin = () => {
     }
 
     return (
-        <div className='w-5/6 md:w-80 mx-auto mt-2'>
+        <div className='w-5/6 md:w-80 mx-auto mt-2 py-5'>
             <div className='flex w-full justify-around items-center border rounded-xl py-2 mb-2'>
                 <img className='w-5 h-5' src={googleLogo} alt="" />
                 <button

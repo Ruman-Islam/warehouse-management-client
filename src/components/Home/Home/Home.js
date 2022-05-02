@@ -6,13 +6,13 @@ import About from '../About/About';
 import { useNavigate } from 'react-router-dom';
 import TopSellers from '../TopSellers/TopSellers';
 import TopSellingProducts from '../TopSellingProducts/TopSellingProducts';
-// import Navbar from '../../Shared/Navbar/Navbar';
+import Navbar from '../../Shared/Navbar/Navbar';
 
 const Home = () => {
     const navigate = useNavigate();
     return (
         <div>
-            {/* <div><Navbar /></div> */}
+            <div><Navbar /></div>
             <div><Banner /></div>
             <div><Inventories isHome />
                 <div className='w-full md:w-2/3 mx-auto text-center md:text-right'>

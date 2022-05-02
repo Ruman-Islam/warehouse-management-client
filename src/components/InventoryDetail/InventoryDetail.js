@@ -7,6 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
 import Spinner from '../Shared/Spinner/Spinner';
+import Navbar from '../Shared/Navbar/Navbar';
 
 const InventoryDetail = () => {
     const navigate = useNavigate();
@@ -62,6 +63,7 @@ const InventoryDetail = () => {
 
     return (
         <>
+            <Navbar />
             {isLoading ? <Spinner />
                 :
                 <div>
