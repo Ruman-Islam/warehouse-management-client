@@ -32,7 +32,7 @@ const InventoryDetail = () => {
         }
         if (quantity > 0 || inputQuantity) {
             newQuantity = isUpdate ? inputQuantity + quantity : quantity - 1;
-            const url = `http://localhost:5000/product/${id}`;
+            const url = `https://protected-waters-02155.herokuapp.com/product/${id}`;
             (async () => {
                 try {
                     const { data } = await axios.put(url, { newQuantity })
@@ -48,7 +48,7 @@ const InventoryDetail = () => {
 
     useEffect(() => {
         setIsLoading(true);
-        const url = `http://localhost:5000/product/${productId}`;
+        const url = `https://protected-waters-02155.herokuapp.com/product/${productId}`;
         (async () => {
             try {
                 const { data } = await axios.get(url)

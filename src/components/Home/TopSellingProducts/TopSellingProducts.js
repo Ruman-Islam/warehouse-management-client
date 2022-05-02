@@ -5,7 +5,7 @@ const TopSellingProducts = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        const url = "http://localhost:5000/top-selling-products";
+        const url = "https://protected-waters-02155.herokuapp.com/top-selling-products";
         (async () => {
             try {
                 const { data } = await axios.get(url)

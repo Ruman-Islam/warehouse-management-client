@@ -9,7 +9,7 @@ const Inventories = ({ isHome }) => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        const url = "http://localhost:5000/products";
+        const url = "https://protected-waters-02155.herokuapp.com/products";
         setIsLoading(true);
         (async () => {
             try {
