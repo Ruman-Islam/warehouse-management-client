@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import { HelmetProvider } from 'react-helmet-async';
 import InventoryDetail from './components/InventoryDetail/InventoryDetail';
 import ManageInventory from './components/ManageInventory/ManageInventory';
 import Registration from './components/Login/Registration';
@@ -20,31 +21,33 @@ function App() {
   return (
     <div className="App page-container">
       <div className='content-wrap'>
-        {/* <Navbar /> */}
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/home' element={<Home />} />
-          <Route path='/inventoryDetail/:productId' element={
-            <PrivateRoute>
-              <InventoryDetail />
-            </PrivateRoute>
-          } />
-          <Route path='/manageInventory' element={
-            <PrivateRoute>
-              <ManageInventory />
-            </PrivateRoute>
-          }>
-            <Route index element={<InventoryList />} />
-            <Route path='/manageInventory/inventory-list' element={<InventoryList />} />
-            <Route path='/manageInventory/inventories' element={<Inventories />} />
-            <Route path='/manageInventory/add-item' element={<AddItem />} />
-            <Route path='/manageInventory/my-items' element={<MyItems />} />
-          </Route>
-          <Route path='/login' element={<Login />} />
-          <Route path='/registration' element={<Registration />} />
-          <Route path='/blog' element={<Blog />} />
-          <Route path='*' element={<NotFound />} />
-        </Routes>
+        <HelmetProvider>
+          {/* <Navbar /> */}
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/home' element={<Home />} />
+            <Route path='/inventoryDetail/:productId' element={
+              <PrivateRoute>
+                <InventoryDetail />
+              </PrivateRoute>
+            } />
+            <Route path='/manageInventory' element={
+              <PrivateRoute>
+                <ManageInventory />
+              </PrivateRoute>
+            }>
+              <Route index element={<InventoryList />} />
+              <Route path='/manageInventory/inventory-list' element={<InventoryList />} />
+              <Route path='/manageInventory/inventories' element={<Inventories />} />
+              <Route path='/manageInventory/add-item' element={<AddItem />} />
+              <Route path='/manageInventory/my-items' element={<MyItems />} />
+            </Route>
+            <Route path='/login' element={<Login />} />
+            <Route path='/registration' element={<Registration />} />
+            <Route path='/blog' element={<Blog />} />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+        </HelmetProvider>
       </div>
       {/* <Footer /> */}
       <ToastContainer />

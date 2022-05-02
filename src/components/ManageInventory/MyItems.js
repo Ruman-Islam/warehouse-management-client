@@ -4,6 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
 import swal from 'sweetalert';
 import auth from '../../Firebase/Firebase.config';
+import PageTitle from '../Shared/PageTitle/PageTitle';
 import Spinner from '../Shared/Spinner/Spinner';
 
 const MyItems = () => {
@@ -60,6 +61,7 @@ const MyItems = () => {
 
     return (
         <div className="py-5">
+            <PageTitle title="My Items" />
             <>
                 {isLoading ? <Spinner />
                     :

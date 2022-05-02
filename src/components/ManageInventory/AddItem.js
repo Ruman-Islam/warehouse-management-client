@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { useForm } from "react-hook-form";
 import formBackground from '../../assets/images/formbackground.jpg';
 import './AddItem.css';
+import PageTitle from '../Shared/PageTitle/PageTitle';
 
 const AddItem = () => {
     const { register, handleSubmit } = useForm();
@@ -60,6 +61,7 @@ const AddItem = () => {
     };
     return (
         <div className='w-2/5 mx-auto my-10'>
+            <PageTitle title="Add Item" />
             <div className='w-full h-24'>
                 <img className='w-full h-full object-contain' src={formBackground} alt="" />
             </div>

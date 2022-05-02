@@ -20,7 +20,11 @@
 - HTML, CSS
 - JavaScript
 - React JS
+- React router
 - Tailwind
 - Firebase
 - React icons
 - Sweet alert
+- Toastify
+- Helmet
+- Font Awesome

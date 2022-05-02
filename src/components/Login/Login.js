@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import auth from '../../Firebase/Firebase.config';
 import Spinner from '../Shared/Spinner/Spinner';
 import SocialLogin from './SocialLogin';
+import PageTitle from '../Shared/PageTitle/PageTitle';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -55,6 +56,7 @@ const Login = () => {
 
     return (
         <div className='w-full flex flex-col justify-center items-center h-full mt-44'>
+            <PageTitle title="Login" />
             <div className='w-5/6 md:w-1/5 rounded-lg shadow-xl h-4/5 md:h-3/5 flex flex-col mx-auto border p-2'>
                 <h1 className='text-center text-xl mt-2 primary-color font-semibold'>LOGIN</h1>
                 <form

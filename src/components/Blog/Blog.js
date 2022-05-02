@@ -1,9 +1,11 @@
 import React from 'react';
 import Navbar from '../Shared/Navbar/Navbar';
+import PageTitle from '../Shared/PageTitle/PageTitle';
 
 const Blog = () => {
     return (
         <div>
+            <PageTitle title="Blog" />
             <Navbar />
             <div className='w-4/5 mx-auto'>
                 <div className='my-5'>

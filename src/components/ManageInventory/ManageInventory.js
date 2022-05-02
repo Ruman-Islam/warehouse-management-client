@@ -1,4 +1,6 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { signOut } from 'firebase/auth';
 import {
     AiOutlineHome,
     AiOutlineFileAdd,
@@ -7,11 +9,10 @@ import {
     AiTwotoneAppstore,
     AiOutlineLogout
 } from "react-icons/ai";
-import './ManageInventory.css';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../Firebase/Firebase.config';
 import photoPlaceHolder from '../../assets/images/photoplaceholder.jpg';
-import { signOut } from 'firebase/auth';
+import PageTitle from '../Shared/PageTitle/PageTitle';
+import './ManageInventory.css';
 
 const ManageInventory = () => {
     const location = useLocation()
@@ -19,6 +20,7 @@ const ManageInventory = () => {
     const navigate = useNavigate();
     return (
         <div className='flex'>
+            <PageTitle title="Manage Inventory" />
             <aside className='w-80 py-8 sidebar text-center flex flex-col h-[100vh] sticky top-0'>
                 <div className='flex flex-col my-5'>
                     {user?.email &&

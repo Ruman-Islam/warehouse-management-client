@@ -1,51 +1,45 @@
-import React, { useState } from 'react';
-import { AiOutlineDoubleRight, AiOutlineDoubleLeft } from "react-icons/ai";
-import img from '../../../assets/images/slide-1.png'
-import img2 from '../../../assets/images/slide-2.png'
-import img3 from '../../../assets/images/slide-3.png'
+import { AiOutlineDoubleRight } from "react-icons/ai";
+import { faHeadset, faClockRotateLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import img2 from '../../../assets/images/double-img-2.webp'
+import img3 from '../../../assets/images/double-img-1.webp'
 import './Banner.css';
 
-const slides = [img, img2, img3];
-
 const Banner = () => {
-    const [current, setCurrent] = useState(0);
-    const length = slides?.length;
-    const nextSlide = () => {
-        setCurrent(current === length - 1 ? 0 : current + 1)
-    }
-
-    const prevSlide = () => {
-        setCurrent(current === 0 ? length - 1 : current - 1);
-    }
-
-    if (!Array.isArray(slides) || slides?.length <= 0) {
-        return null;
-    }
     return (
-        <div className='w-full flex relative'>
-            <button className='text-lg md:text-3xl text-black absolute left-1 top-0 bottom-0 z-10' onClick={prevSlide}>
-                <div className='bg-opacity-10 bg-slate-500 px-1 md:px-2 py-2 md:py-5'>
-                    <AiOutlineDoubleLeft />
+        <div className='flex h-[80vh] justify-center items-center w-4/5 mx-auto mb-20'>
+            <div className='relative basis-3/6 pl-36'>
+                <div><img src={img3} alt="" /></div>
+                <div className='absolute top-20 md:top-96 left-[-10px]'><img src={img2} alt="" /></div>
+            </div>
+            <div className='basis-3/6'>
+                <div>
+                    <div className='flex items-center text-3xl text-red-500'>
+                        <AiOutlineDoubleRight />
+                        <h2 className='pl-5 my-5 font-bold'>ABOUT US</h2>
+                    </div>
+                    <h1 className='text-5xl leading-tight my-5'>We are trusted &amp; professional logistic company</h1>
+                    <p>The Shelter is one of the trusted online gadgets warehouse in Bangladesh. SBD is all about world class electronic warehouse. We provide electronic and Gadgets warehouse facilities. We provide delivery within 24-48 hours throughout the whole Bangladesh.</p>
                 </div>
-            </button>
-            <>
-                {slides.map((img, index) => {
-                    return (
-                        <div className={index === current ? 'active' : ''} key={index}>
-                            {index === current && (
-                                <div className='bg-cover bg-center'>
-                                    <img className='w-full' src={img} alt="" />
-                                </div>
-                            )}
+                <div className='flex my-10 py-10 justify-around w-full'>
+                    <div className='flex basis-3/6 items-center'>
+                        <div className='text-6xl basis-1/6 pr-5 text-red-500'>
+                            <FontAwesomeIcon icon={faHeadset} />
                         </div>
-                    )
-                })}
-            </>
-            <button className='text-lg md:text-3xl text-black absolute right-1 top-0 bottom-0 z-10' onClick={nextSlide}>
-                <div className='bg-opacity-10 bg-slate-500 px-1 md:px-2 py-2 md:py-5'>
-                    <AiOutlineDoubleRight />
+                        <div className='basis-3/6'>
+                            <h1 className='text-md font-semibold'>24/7 hours customer support</h1>
+                        </div>
+                    </div>
+                    <div className='flex basis-3/6 items-center'>
+                        <div className='text-6xl basis-1/6 pr-5 text-red-500'>
+                            <FontAwesomeIcon icon={faClockRotateLeft} />
+                        </div>
+                        <div className='basis-3/6'>
+                            <h1 className='text-md font-semibold'>Properly on time Delivery to the person</h1>
+                        </div>
+                    </div>
                 </div>
-            </button>
+            </div>
         </div>
     );
 };

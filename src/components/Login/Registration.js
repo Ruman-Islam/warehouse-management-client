@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../Firebase/Firebase.config';
 import Spinner from '../Shared/Spinner/Spinner';
 import SocialLogin from './SocialLogin';
+import PageTitle from '../Shared/PageTitle/PageTitle';
 
 const Registration = () => {
     const navigate = useNavigate();
@@ -58,6 +59,7 @@ const Registration = () => {
 
     return (
         <div className='w-full flex flex-col justify-center items-center h-[100vh]'>
+            <PageTitle title="Signup" />
             <div className='w-5/6 md:w-1/5 rounded-lg shadow-xl h-6/6 flex flex-col mx-auto border py-5'>
                 <h1 className='text-center text-xl mt-2 primary-color font-semibold'>SIGN UP</h1>
                 <form
