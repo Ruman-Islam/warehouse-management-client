@@ -20,6 +20,9 @@ const AddItem = () => {
         productInfo.tags = tagsArray;
 
         switch (true) {
+            case (!productInfo.email):
+                notify('Opps! you missed email');
+                break;
             case (!productInfo.productName):
                 notify('Opps! you missed product name');
                 break;
@@ -61,6 +64,10 @@ const AddItem = () => {
                 <img className='w-full h-full object-contain' src={formBackground} alt="" />
             </div>
             <form className='flex flex-col shadow-2xl bg-transparent p-5 rounded-lg' onSubmit={handleSubmit(onSubmit)}>
+                <input
+                    className='outline-0 rounded-lg border px-5 py-2 border-blue-900 mb-2'
+                    placeholder='Your email'
+                    name="email" autoComplete="off" type="email" {...register("email")} />
                 <input
                     className='outline-0 rounded-lg border px-5 py-2 border-blue-900 mb-2'
                     placeholder='Product name'
