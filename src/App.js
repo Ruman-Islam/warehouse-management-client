@@ -10,7 +10,7 @@ import NotFound from './components/NotFound/NotFound';
 import Home from './components/Home/Home/Home';
 import Login from './components/Login/Login';
 import Inventories from './components/Inventories/Inventories';
-import InventoryList from './components/ManageInventory/InventoryList';
+import InventoryList from './components/InventoryList/InventoryList';
 import AddItem from './components/ManageInventory/AddItem';
 import MyItems from './components/ManageInventory/MyItems';
 import './App.css';

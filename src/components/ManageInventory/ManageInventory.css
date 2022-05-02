@@ -30,3 +30,11 @@
     flex-basis: 60%;
     text-align: start;
 }
+
+.active-link {
+    background-color: white;
+    padding: 1px 5px;
+    color: var(--primary-color);
+    border-radius: 5px;
+    font-weight: 600;
+}

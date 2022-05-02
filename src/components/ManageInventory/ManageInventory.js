@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import {
     AiOutlineHome,
     AiOutlineFileAdd,
@@ -7,16 +7,17 @@ import {
     AiTwotoneAppstore
 } from "react-icons/ai";
 import './ManageInventory.css';
-import CustomLink from '../CustomLink/CustomLink';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../Firebase/Firebase.config';
 
 const ManageInventory = () => {
+    const location = useLocation()
+    console.log(location.pathname);
     const [user, ,] = useAuthState(auth);
     const navigate = useNavigate();
     return (
-        <div className='flex h-[110vh] relative'>
-            <aside className='w-80 py-8 sidebar text-center flex flex-col sticky'>
+        <div className='flex'>
+            <aside className='w-80 py-8 sidebar text-center flex flex-col h-[100vh] sticky top-0'>
                 <div className='flex flex-col my-5'>
                     {user?.email &&
                         <div className='inner-container'>
@@ -40,7 +41,9 @@ const ManageInventory = () => {
                         <div className='icon'><AiTwotoneAppstore /></div>
                         <div className='button'>
                             <button
-                            ><CustomLink to='/manageInventory/inventory-list'>Manage Inventory</CustomLink>
+                                onClick={() => navigate('/manageInventory/inventory-list')}
+                                className={location.pathname === '/manageInventory/inventory-list' && 'active-link'}
+                            >Manage Inventory
                             </button>
                         </div>
                     </div>
@@ -48,7 +51,9 @@ const ManageInventory = () => {
                         <div className='icon'><AiOutlineOrderedList /></div>
                         <div className='button'>
                             <button
-                            ><CustomLink to='/manageInventory/inventories'>Inventories</CustomLink>
+                                onClick={() => navigate('/manageInventory/inventories')}
+                                className={location.pathname === '/manageInventory/inventories' && 'active-link'}
+                            >Inventories
                             </button>
                         </div>
                     </div>
@@ -57,7 +62,9 @@ const ManageInventory = () => {
                             <div className='icon'><AiOutlineFileAdd /></div>
                             <div className='button'>
                                 <button
-                                ><CustomLink to='/manageInventory/add-item'>Add Item</CustomLink>
+                                    onClick={() => navigate('/manageInventory/add-item')}
+                                    className={location.pathname === '/manageInventory/add-item' && 'active-link'}
+                                >Add Item
                                 </button>
                             </div>
                         </div>}
@@ -66,7 +73,9 @@ const ManageInventory = () => {
                             <div className='icon'><AiOutlineTag /></div>
                             <div className='button'>
                                 <button
-                                ><CustomLink to='/manageInventory/my-items'>My Items</CustomLink>
+                                    onClick={() => navigate('/manageInventory/my-items')}
+                                    className={location.pathname === '/manageInventory/my-items' && 'active-link'}
+                                >My Items
                                 </button>
                             </div>
                         </div>}
