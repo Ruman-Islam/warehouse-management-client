@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { AiFillDelete } from "react-icons/ai";
 import Spinner from '../../../Shared/Spinner/Spinner';
 import { toast } from 'react-toastify';
 import swal from 'sweetalert';
@@ -9,6 +10,9 @@ const InventoryList = () => {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [changeState, setChangeState] = useState(false);
+    const [limit, setLimit] = useState(6);
+    const [pageNumber, setPageNumber] = useState(0);
+    const [totalPage, setTotalPage] = useState(0);
 
     const notify = (message) => {
         toast.warn(message, {
@@ -18,12 +22,13 @@ const InventoryList = () => {
 
 
     useEffect(() => {
-        const url = "https://protected-waters-02155.herokuapp.com/products";
+        const url = `http://localhost:5000/products?limit=${limit}&pageNumber=${pageNumber}}`;
         setIsLoading(true);
         (async () => {
             try {
                 const { data } = await axios.get(url)
                 setProducts(data.products);
+                setTotalPage(Math.ceil(data.count / limit));
                 setIsLoading(false);
             } catch (err) {
                 if (err.response.status === 404) {
@@ -33,10 +38,10 @@ const InventoryList = () => {
                 }
             }
         })()
-    }, [changeState])
+    }, [changeState, limit, pageNumber])
 
     const handleDelete = async productId => {
-        const url = `https://protected-waters-02155.herokuapp.com/delete-product/${productId}`
+        const url = `http://localhost:5000/delete-product/${productId}`
         try {
             swal({
                 title: "Are your sure?",
@@ -61,8 +66,22 @@ const InventoryList = () => {
         }
     }
 
+    const prevPage = () => {
+        if (pageNumber > 0) {
+            const pageNo = pageNumber - 1;
+            setPageNumber(pageNo);
+        }
+    }
+    const nextPage = () => {
+        if (totalPage > pageNumber + 1) {
+            const pageNo = pageNumber + 1;
+            setPageNumber(pageNo);
+        }
+    }
+
     return (
         <div className="py-5">
+            <h1 className='ml-5 text-xl'>{products.length}</h1>
             <>
                 {isLoading ? <Spinner />
                     :
@@ -82,11 +101,11 @@ const InventoryList = () => {
                                     <td className='text-left'>{product.productName}</td>
                                     <td className='hidden md:block md:mt-5'>{product._id}</td>
                                     <td>{product.quantity}</td>
-                                    <td>
+                                    <td className='flex justify-center'>
                                         <button
                                             onClick={() => handleDelete(product._id)}
-                                            className='px-10 py-0 rounded-md my-2 bg-red-700 hover:bg-red-600 text-white'>
-                                            Delete
+                                            className='flex items-center justify-between text-4xl rounded-md mt-3 hover:text-red-600 text-red-700'>
+                                            <AiFillDelete />
                                         </button>
                                     </td>
                                 </tr>)}
@@ -94,6 +113,31 @@ const InventoryList = () => {
                     </table>
                 }
             </>
+            <div className='flex justify-center my-20 mx-auto'>
+                <>
+                    <button className='mr-10' onClick={prevPage}>Prev</button>
+                    { // here making an array for picking sequel of 1, 2, 3
+                        // for maintaining page number dynamically
+                        [...Array(totalPage).keys()]
+                            .map(pgNumber =>
+                                <button key={pgNumber}
+                                    className={`border p-2 ${pageNumber === pgNumber ? 'bg-blue-900 text-white' : ''}`}
+                                    onClick={() => setPageNumber(pgNumber)}>
+                                    {pgNumber + 1}
+                                </button>
+                            )
+                    }
+                    <button className='ml-10' onClick={nextPage}>Next</button>
+                </>
+                <div className='selected-page-btn ml-10 borde'>
+                    <select defaultValue={limit}
+                        onChange={(e) => setLimit(e.target.value)}>
+                        <option value="4">4</option>
+                        <option value="8">8</option>
+                        <option value="12">12</option>
+                    </select>
+                </div>
+            </div>
         </div>
     );
 };

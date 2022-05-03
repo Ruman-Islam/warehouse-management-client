@@ -53,7 +53,7 @@ const Login = () => {
     }
     if (user) {
         (async () => {
-            const { data } = await axios.post('https://protected-waters-02155.herokuapp.com/login', { email: user.user?.email })
+            const { data } = await axios.post('http://localhost:5000/login', { email: user.user?.email })
             localStorage.setItem('accessToken', data);
         })();
         navigate(from, { replace: true });

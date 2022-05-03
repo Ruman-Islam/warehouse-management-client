@@ -1,18 +1,23 @@
 .sidebar-full-screen, .sidebar-small-screen {
-    background: url('../../../assets/images/download.jpg');
+    background: url('../../../assets/images/nav_nachos@2x.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    /* background-color: var(--primary-color); */
+    background-color: rgba(0, 0, 0, 0.925);
 }
 
 .inner-container {
     color: white;
     width: 100%;
-    margin:  0 auto;
+    margin:  8px auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 0;
+    padding: 5px 0;
+}
+.inner-container:hover {
+    background-color: rgba(255, 255, 255, 0.116);
 }
 .inner-container .icon, .button {
     font-size: 16px;
@@ -28,7 +33,10 @@
     flex-basis: 60%;
     text-align: start;
 }
-
+.home-button {
+    background-color: rgba(255, 255, 255, 0.116);
+    color: white !important;
+}
 .active-link {
     color: var(--active-link-color);
 }

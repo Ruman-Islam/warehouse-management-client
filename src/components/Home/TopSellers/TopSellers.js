@@ -5,7 +5,7 @@ import TopSeller from './TopSeller';
 const TopSellers = () => {
     const [topSellers, setTopSellers] = useState([]);
     useEffect(() => {
-        const url = "https://protected-waters-02155.herokuapp.com/top-sellers";
+        const url = "http://localhost:5000/top-sellers";
         (async () => {
             try {
                 const { data } = await axios.get(url)

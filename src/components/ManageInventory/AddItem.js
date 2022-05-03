@@ -52,10 +52,10 @@ const AddItem = () => {
                 notify('Opps! you missed description');
                 break;
             default:
-                await axios.post("https://protected-waters-02155.herokuapp.com/add-product", productInfo)
+                await axios.post("http://localhost:5000/add-product", productInfo)
                     .then(res => {
                         notify("Product successfully added ");
-                        e.target.reset();
+                        // e.target.reset();
                     })
         }
     };
