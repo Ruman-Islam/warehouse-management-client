@@ -5,21 +5,23 @@ import { AiFillDelete } from "react-icons/ai";
 import Spinner from '../../../Shared/Spinner/Spinner';
 import { toast } from 'react-toastify';
 import swal from 'sweetalert';
+import './InventoryList.css';
+import Pagination from '../../../Shared/Pagination/Pagination';
 
 const InventoryList = () => {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [changeState, setChangeState] = useState(false);
-    const [limit, setLimit] = useState(6);
+    const [limit, setLimit] = useState(10);
     const [pageNumber, setPageNumber] = useState(0);
     const [totalPage, setTotalPage] = useState(0);
+    const [totalProductCount, setTotalProductCount] = useState(0);
 
     const notify = (message) => {
         toast.warn(message, {
             position: toast.POSITION.TOP_CENTER
         });
     }
-
 
     useEffect(() => {
         const url = `http://localhost:5000/products?limit=${limit}&pageNumber=${pageNumber}}`;
@@ -29,6 +31,7 @@ const InventoryList = () => {
                 const { data } = await axios.get(url)
                 setProducts(data.products);
                 setTotalPage(Math.ceil(data.count / limit));
+                setTotalProductCount(data.count);
                 setIsLoading(false);
             } catch (err) {
                 if (err.response.status === 404) {
@@ -66,22 +69,9 @@ const InventoryList = () => {
         }
     }
 
-    const prevPage = () => {
-        if (pageNumber > 0) {
-            const pageNo = pageNumber - 1;
-            setPageNumber(pageNo);
-        }
-    }
-    const nextPage = () => {
-        if (totalPage > pageNumber + 1) {
-            const pageNo = pageNumber + 1;
-            setPageNumber(pageNo);
-        }
-    }
-
     return (
         <div className="py-5">
-            <h1 className='ml-5 text-xl'>{products.length}</h1>
+            <h1 className='ml-5 mb-5 text-sm'>Total {totalProductCount} results</h1>
             <>
                 {isLoading ? <Spinner />
                     :
@@ -113,31 +103,16 @@ const InventoryList = () => {
                     </table>
                 }
             </>
-            <div className='flex justify-center my-20 mx-auto'>
-                <>
-                    <button className='mr-10' onClick={prevPage}>Prev</button>
-                    { // here making an array for picking sequel of 1, 2, 3
-                        // for maintaining page number dynamically
-                        [...Array(totalPage).keys()]
-                            .map(pgNumber =>
-                                <button key={pgNumber}
-                                    className={`border p-2 ${pageNumber === pgNumber ? 'bg-blue-900 text-white' : ''}`}
-                                    onClick={() => setPageNumber(pgNumber)}>
-                                    {pgNumber + 1}
-                                </button>
-                            )
-                    }
-                    <button className='ml-10' onClick={nextPage}>Next</button>
-                </>
-                <div className='selected-page-btn ml-10 borde'>
-                    <select defaultValue={limit}
-                        onChange={(e) => setLimit(e.target.value)}>
-                        <option value="4">4</option>
-                        <option value="8">8</option>
-                        <option value="12">12</option>
-                    </select>
-                </div>
-            </div>
+            <Pagination
+                isInventoryList
+                limit={limit}
+                isLoading={isLoading}
+                totalPage={totalPage}
+                pageNumber={pageNumber}
+                totalProductCount={totalProductCount}
+                setPageNumber={setPageNumber}
+                setLimit={setLimit}
+            />
         </div>
     );
 };

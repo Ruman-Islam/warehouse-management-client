@@ -13,6 +13,7 @@ import Footer from '../../../Shared/Footer/Footer';
 const InventoryDetail = () => {
     const navigate = useNavigate();
     const { productId } = useParams();
+    console.log(productId);
     const [product, setProduct] = useState({});
     const [isLoading, setIsLoading] = useState(false);
     const [quantity, setQuantity] = useState(0);
@@ -123,7 +124,7 @@ const InventoryDetail = () => {
                             </form>
                             <div className='w-full md:w-2/4 ml-auto text-center md:text-right'>
                                 <button
-                                    onClick={() => navigate('/manageInventory')}
+                                    onClick={() => navigate('/dashboard/inventory-list')}
                                     className='text-blue-800 text-sm'>
                                     <div className='flex justify-end items-center'>
                                         <AiOutlineDoubleRight />

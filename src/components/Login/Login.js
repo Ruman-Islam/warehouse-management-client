@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import React, { useEffect, useState } from 'react';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { AiOutlineMail, AiOutlineUnlock } from "react-icons/ai";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -13,6 +13,7 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
+    const [email, setEmail] = useState('');
 
     const notify = (message) => {
         toast.warn(message, {
@@ -24,8 +25,9 @@ const Login = () => {
         signInWithEmailAndPassword,
         user,
         loading,
-        error,
+        userError,
     ] = useSignInWithEmailAndPassword(auth);
+    const [sendPasswordResetEmail, sending, resetError] = useSendPasswordResetEmail(auth);
 
     const handleLogin = async e => {
         e.preventDefault();
@@ -40,15 +42,20 @@ const Login = () => {
         }
     }
 
-    useEffect(() => {
-        if (error) {
-            const err = (error.message.split('/')[1]);
-            const errorMessage = err.split(")")[0];
-            if (errorMessage) { notify(errorMessage); }
-        }
-    }, [error])
+    // const handleEmail = e => {
+    //     const name = e.target.email.value;
+    // }
 
-    if (loading) {
+
+    useEffect(() => {
+        if (userError || resetError) {
+            const err = (userError ? userError.message?.split('/')[1] : resetError.message?.split('/')[1]);
+            const userErrorMessage = err.split(")")[0];
+            if (userErrorMessage) { notify(userErrorMessage); }
+        }
+    }, [userError, resetError])
+
+    if (loading || sending) {
         return <Spinner />
     }
     if (user) {
@@ -71,7 +78,8 @@ const Login = () => {
                         <div className='border p-3'>
                             <AiOutlineMail />
                         </div>
-                        <input className='border border-l-0 w-full p-3 text-xs my-2 outline-0 ' type="email" placeholder='Email' name="email" />
+                        <input onChange={e => setEmail(e.target.value)}
+                            className='border border-l-0 w-full p-3 text-xs my-2 outline-0 ' type="email" placeholder='Email' name="email" />
                     </div>
                     <div className='flex justify-center items-center'>
                         <div className='border p-3'>
@@ -82,7 +90,12 @@ const Login = () => {
                     <small
                         className='text-center text-slate-500'>
                         Forgot your
-                        <span className='primary-color cursor-pointer'> Password?</span>
+                        <span onClick={async () => {
+                            await sendPasswordResetEmail(email)
+                            if (email) { notify('A reset code has been sent') }
+                            setEmail('');
+                        }}
+                            className='primary-color cursor-pointer'> Password?</span>
                     </small>
                     <input className='background-color text-white mt-5 py-2 cursor-pointer' type="submit" value="Log in" />
                 </form>

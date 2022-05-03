@@ -20,7 +20,7 @@ const Home = () => {
                 <PageTitle title="Home" />
                 <div className='w-full md:w-2/3 mx-auto text-center md:text-right'>
                     <button
-                        onClick={() => navigate('/manageInventory')}
+                        onClick={() => navigate('/dashboard/inventory-list')}
                         className='text-blue-800 text-sm'>
                         <div className='flex justify-end items-center'><AiOutlineDoubleRight /><span>Manage Inventories</span></div>
                     </button>

@@ -24,7 +24,7 @@ const SocialLogin = () => {
 
     useEffect(() => {
         if (googleError || facebookError) {
-            const err = (googleError?.message.split('/')[1]) || (facebookError?.message.split('/')[1]);
+            const err = (googleError ? googleError.message?.split('/')[1] : facebookError.message?.split('/')[1]);
             const errorMessage = err.split(")")[0];
             if (errorMessage) { notify(errorMessage) };
         }
@@ -50,9 +50,7 @@ const SocialLogin = () => {
                 <img className='w-5 h-5' src={googleLogo} alt="" />
                 <button
                     className='mr-5 md:mr-16'
-                    onClick={async () => {
-                        await signInWithGoogle()
-                    }}>
+                    onClick={async () => await signInWithGoogle()}>
                     <span className='font-semibold'>Continue with Google</span>
                 </button>
             </div>
@@ -60,9 +58,7 @@ const SocialLogin = () => {
                 <img className='w-12' src={facebookLogo} alt="" />
                 <button
                     className='mr-5 md:mr-16'
-                    onClick={async () => {
-                        await signInWithFacebook()
-                    }}>
+                    onClick={async () => await signInWithFacebook()}>
                     <span className='font-semibold'>Continue with Facebook</span>
                 </button>
             </div>

@@ -9,11 +9,17 @@ import swal from 'sweetalert';
 import auth from '../../Firebase/Firebase.config';
 import PageTitle from '../Shared/PageTitle/PageTitle';
 import Spinner from '../Shared/Spinner/Spinner';
+import Pagination from '../Shared/Pagination/Pagination';
 
 const MyItems = () => {
     const [user, ,] = useAuthState(auth);
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [changeState, setChangeState] = useState(false);
+    const [userTotalProducts, setUserTotalProducts] = useState(0);
+    const [limit, setLimit] = useState(10);
+    const [pageNumber, setPageNumber] = useState(0);
+    const [totalPage, setTotalPage] = useState(0);
     const navigate = useNavigate();
 
     const notify = (message) => {
@@ -25,7 +31,7 @@ const MyItems = () => {
     useEffect(() => {
         setIsLoading(true);
         const email = user?.email;
-        const url = `http://localhost:5000/products-user?email=${email}`;
+        const url = `http://localhost:5000/products-user?email=${email}&limit=${limit}&pageNumber=${pageNumber}`;
         (async () => {
             try {
                 const { data } = await axios.get(url, {
@@ -34,9 +40,11 @@ const MyItems = () => {
                     }
                 })
                 setProducts(data.products);
+                setUserTotalProducts(data.count);
+                setTotalPage(Math.ceil(data.count / limit));
                 setIsLoading(false);
             } catch (err) {
-                console.log(err);
+                setChangeState(!changeState);
                 if (err.response.status === 403 || err.response.status === 401) {
                     setIsLoading(false);
                     signOut(auth);
@@ -44,7 +52,7 @@ const MyItems = () => {
                 }
             }
         })()
-    }, [user?.email, navigate])
+    }, [user?.email, navigate, limit, pageNumber, changeState])
 
     const handleDelete = async productId => {
         const url = `http://localhost:5000/delete-product/${productId}`
@@ -74,13 +82,13 @@ const MyItems = () => {
 
     return (
         <div className="py-5">
-            <h1 className='ml-5 text-xl'>{products.length}</h1>
             <PageTitle title="My Items" />
+            <h1 className='ml-5 mb-5 text-sm'>Total {userTotalProducts} results</h1>
             <>
                 {isLoading ? <Spinner />
                     :
                     <table className='table-fixed w-11/12 mx-auto'>
-                        <thead>
+                        <thead className='border'>
                             <tr className='h-16 text-xs md:text-lg'>
                                 <th>PRODUCT NAME</th>
                                 <th className='hidden md:block md:mt-5'>ID</th>
@@ -89,7 +97,7 @@ const MyItems = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {products?.map(product =>
+                            {products.map(product =>
                                 <tr key={product._id}
                                     className='h-16 primary-color text-center border border-l-0 border-r-0 border-t-0 rounded-md'>
                                     <td className='text-left'>{product.productName}</td>
@@ -107,6 +115,14 @@ const MyItems = () => {
                     </table>
                 }
             </>
+            <Pagination
+                totalPage={totalPage}
+                isLoading={isLoading}
+                setPageNumber={setPageNumber}
+                pageNumber={pageNumber}
+                userTotalProducts={userTotalProducts}
+                setLimit={setLimit}
+                limit={limit} />
         </div>
     );
 };
