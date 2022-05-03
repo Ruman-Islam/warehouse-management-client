@@ -31,7 +31,7 @@ const MyItems = () => {
     useEffect(() => {
         setIsLoading(true);
         const email = user?.email;
-        const url = `http://localhost:5000/products-user?email=${email}&limit=${limit}&pageNumber=${pageNumber}`;
+        const url = `https://protected-waters-02155.herokuapp.com/products-user?email=${email}&limit=${limit}&pageNumber=${pageNumber}`;
         (async () => {
             try {
                 const { data } = await axios.get(url, {
@@ -55,7 +55,7 @@ const MyItems = () => {
     }, [user?.email, navigate, limit, pageNumber, changeState])
 
     const handleDelete = async productId => {
-        const url = `http://localhost:5000/delete-product/${productId}`
+        const url = `https://protected-waters-02155.herokuapp.com/delete-product/${productId}`
         try {
             swal({
                 title: "Are your sure?",

@@ -24,7 +24,7 @@ const InventoryList = () => {
     }
 
     useEffect(() => {
-        const url = `http://localhost:5000/products?limit=${limit}&pageNumber=${pageNumber}}`;
+        const url = `https://protected-waters-02155.herokuapp.com/products?limit=${limit}&pageNumber=${pageNumber}}`;
         setIsLoading(true);
         (async () => {
             try {
@@ -44,7 +44,7 @@ const InventoryList = () => {
     }, [changeState, limit, pageNumber])
 
     const handleDelete = async productId => {
-        const url = `http://localhost:5000/delete-product/${productId}`
+        const url = `https://protected-waters-02155.herokuapp.com/delete-product/${productId}`
         try {
             swal({
                 title: "Are your sure?",

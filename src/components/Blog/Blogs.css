@@ -1,0 +1,10 @@
+.blog-container{
+    margin-bottom: 0;
+}
+
+@media only screen and (max-width: 576px) {
+    .blog-container{
+        margin-bottom: 750px;
+    }
+    
+}

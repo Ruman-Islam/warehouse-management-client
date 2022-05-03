@@ -11,6 +11,7 @@ const Pagination = ({
     totalProductCount,
     userTotalProducts,
     limit }) => {
+    console.log(totalPage);
 
     const prevPage = () => {
         if (pageNumber > 0) {
