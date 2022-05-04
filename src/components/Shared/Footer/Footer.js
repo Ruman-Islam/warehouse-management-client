@@ -28,7 +28,7 @@ const Footer = () => {
             </div>
             <div className='flex flex-col md:flex-row justify-around px-16 md:px-28 py-5 md:py-20'>
                 <div className='md:w-1/4 w-full mb-5 md:mb-0'>
-                    <h1 className='primary-color text-center md:text-left text-3xl font-extrabold'>Builders</h1>
+                    <h1 className='primary-color text-center md:text-left text-3xl font-extrabold'>Shelter</h1>
                     <div className='flex flex-col md:flex-row justify-between items-center my-5'>
                         <div>
                             <img src={supportIcon} alt="" />

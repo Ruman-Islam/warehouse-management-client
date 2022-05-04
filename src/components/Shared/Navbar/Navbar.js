@@ -20,7 +20,7 @@ const Navbar = () => {
     return (
         <header className='w-full'>
             <nav className='background-color text-white flex justify-center'>
-                <div className='flex justify-between items-center h-12 md:h-28 w-full md:w-2/3 lg:w-3/4 px-5'>
+                <div className='flex justify-between items-center h-12 xl:h-20 2xl:h-28 w-full md:w-2/3 lg:w-3/4 px-5'>
                     <h1 className='text-2xl md:text-3xl lg:text-4xl'>Shelter</h1>
                     <ul className='flex text-xl md:text-2xl w-64 justify-evenly items-center'>
                         {user ? <li className='text-sm'>{user.displayName}</li> : <li><AiOutlineUser /></li>}

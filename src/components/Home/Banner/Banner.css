@@ -5,11 +5,9 @@
     animation-duration: 2s;
 }
 
-.topper {
-    border: black 1px solid;
-    height: 100%;
-    margin-top: 800px;
-}
+/* @media only screen and (max-width: ) {
+    
+} */
 
 @keyframes design {
     0%{

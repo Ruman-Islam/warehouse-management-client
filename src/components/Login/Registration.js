@@ -56,7 +56,7 @@ const Registration = () => {
     }
     if (emailUser) {
         (async () => {
-            const { data } = await axios.post('https://protected-waters-02155.herokuapp.com/login', { email: emailUser.user?.email })
+            const { data } = await axios.post('http://localhost:5000/login', { email: emailUser.user?.email })
             localStorage.setItem('accessToken', data);
         })();
         navigate(from, { replace: true });
@@ -65,7 +65,7 @@ const Registration = () => {
     return (
         <div className='w-full flex flex-col justify-center items-center h-[100vh]'>
             <PageTitle title="Signup" />
-            <div className='w-5/6 md:w-1/5 rounded-lg shadow-xl h-6/6 flex flex-col mx-auto border py-5'>
+            <div className='w-5/6 xl:w-1/4 2xl:w-1/5 rounded-lg shadow-xl flex flex-col mx-auto border py-5'>
                 <h1 className='text-center text-xl mt-2 primary-color font-semibold'>SIGN UP</h1>
                 <form
                     onSubmit={handleRegistration}
@@ -107,7 +107,7 @@ const Registration = () => {
                 </small>
                 <SocialLogin />
             </div>
-            <button onClick={() => navigate('/home')} className='mt-10 text-xl hover:text-blue-800'>Back To Home</button>
+            <button onClick={() => navigate('/home')} className='mt-5 text-xl hover:text-blue-800 underline'>Back To Home</button>
         </div>
     );
 };

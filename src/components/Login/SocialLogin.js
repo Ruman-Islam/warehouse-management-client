@@ -36,7 +36,7 @@ const SocialLogin = () => {
 
     if (googleUser || facebookUser) {
         (async () => {
-            const { data } = await axios.post('https://protected-waters-02155.herokuapp.com/login', {
+            const { data } = await axios.post('http://localhost:5000/login', {
                 email: (googleUser ? googleUser.user?.email : facebookUser.user?.email)
             })
             localStorage.setItem('accessToken', data);
@@ -45,22 +45,34 @@ const SocialLogin = () => {
     }
 
     return (
-        <div className='w-5/6 md:w-80 mx-auto mt-2 py-5'>
-            <div className='flex w-full justify-around items-center border rounded-xl py-2 mb-2'>
-                <img className='w-5 h-5' src={googleLogo} alt="" />
-                <button
-                    className='mr-5 md:mr-16'
-                    onClick={async () => await signInWithGoogle()}>
-                    <span className='font-semibold'>Continue with Google</span>
-                </button>
+        <div className='w-5/6 md:w-11/12 lg:w-80 mx-auto mt-2 py-5'>
+            <div
+                onClick={async () => await signInWithGoogle()}
+                className='flex w-full justify-center items-center border rounded py-2 mb-2 cursor-pointer'>
+                <div>
+                    <img className='w-5 h-5 mr-10' src={googleLogo} alt="" />
+                </div>
+                <div>
+                    <button className='mr-5 md:mr-16'>
+                        <span className='font-semibold'>
+                            Sign in with Google
+                        </span>
+                    </button>
+                </div>
             </div>
-            <div className='flex w-full justify-around items-center border rounded-xl py-2'>
-                <img className='w-12' src={facebookLogo} alt="" />
-                <button
-                    className='mr-5 md:mr-16'
-                    onClick={async () => await signInWithFacebook()}>
-                    <span className='font-semibold'>Continue with Facebook</span>
-                </button>
+            <div
+                onClick={async () => await signInWithFacebook()}
+                className='flex w-full justify-around items-center border rounded py-2 cursor-pointer'>
+                <div>
+                    <img className='w-12' src={facebookLogo} alt="" />
+                </div>
+                <div>
+                    <button className='mr-5 md:mr-16'>
+                        <span className='font-semibold'>
+                            Sign in with Facebook
+                        </span>
+                    </button>
+                </div>
             </div>
         </div>
     );

@@ -3,13 +3,12 @@ import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { AiFillDelete } from "react-icons/ai";
-import swal from 'sweetalert';
 import auth from '../../Firebase/Firebase.config';
 import PageTitle from '../Shared/PageTitle/PageTitle';
 import Spinner from '../Shared/Spinner/Spinner';
 import Pagination from '../Shared/Pagination/Pagination';
+import UseProductDelete from '../../Hooks/UseProductDelete';
 
 const MyItems = () => {
     const [user, ,] = useAuthState(auth);
@@ -21,17 +20,16 @@ const MyItems = () => {
     const [pageNumber, setPageNumber] = useState(0);
     const [totalPage, setTotalPage] = useState(0);
     const navigate = useNavigate();
-
-    const notify = (message) => {
-        toast.warn(message, {
-            position: toast.POSITION.TOP_CENTER
-        });
-    }
+    const { handleDelete } = UseProductDelete(
+        products,
+        setProducts,
+        changeState,
+        setChangeState);
 
     useEffect(() => {
         setIsLoading(true);
         const email = user?.email;
-        const url = `https://protected-waters-02155.herokuapp.com/products-user?email=${email}&limit=${limit}&pageNumber=${pageNumber}`;
+        const url = `http://localhost:5000/products-user?email=${email}&limit=${limit}&pageNumber=${pageNumber}`;
         (async () => {
             try {
                 const { data } = await axios.get(url, {
@@ -52,33 +50,7 @@ const MyItems = () => {
                 }
             }
         })()
-    }, [user?.email, navigate, limit, pageNumber, changeState])
-
-    const handleDelete = async productId => {
-        const url = `https://protected-waters-02155.herokuapp.com/delete-product/${productId}`
-        try {
-            swal({
-                title: "Are your sure?",
-                text: "Deleting can't be undone",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-                safeMode: false
-            })
-                .then(async (isOkay) => {
-                    if (isOkay) {
-                        const { data } = await axios.delete(url)
-                        if (data.success) {
-                            const remainingProducts = products.filter(product => product._id !== productId);
-                            setProducts(remainingProducts);
-                            notify('Successfully deleted')
-                        }
-                    }
-                });
-        } catch (err) {
-            console.log(err);
-        }
-    }
+    }, [user?.email, navigate, limit, pageNumber, changeState]);
 
     return (
         <div className="py-5">

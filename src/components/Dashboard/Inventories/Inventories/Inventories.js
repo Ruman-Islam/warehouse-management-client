@@ -10,10 +10,11 @@ import Spinner from "../../../Shared/Spinner/Spinner";
 const Inventories = ({ isHome }) => {
     const location = useLocation();
     const [products, setProducts] = useState([]);
+    const [changeState, setStateChange] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        const url = "https://protected-waters-02155.herokuapp.com/products";
+        const url = "http://localhost:5000/products";
         setIsLoading(true);
         (async () => {
             try {
@@ -22,12 +23,12 @@ const Inventories = ({ isHome }) => {
                 setIsLoading(false);
             } catch (err) {
                 if (err.response.status === 404) {
-                    console.log(err.response.status);
+                    setStateChange(!changeState);
                     setIsLoading(false);
                 }
             }
         })()
-    }, [])
+    }, [changeState])
 
     return (
         <>

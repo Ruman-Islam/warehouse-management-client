@@ -3,10 +3,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import Spinner from '../../../Shared/Spinner/Spinner';
-import { toast } from 'react-toastify';
-import swal from 'sweetalert';
-import './InventoryList.css';
 import Pagination from '../../../Shared/Pagination/Pagination';
+import UseProductDelete from '../../../../Hooks/UseProductDelete';
+import './InventoryList.css';
 
 const InventoryList = () => {
     const [products, setProducts] = useState([]);
@@ -16,15 +15,14 @@ const InventoryList = () => {
     const [pageNumber, setPageNumber] = useState(0);
     const [totalPage, setTotalPage] = useState(0);
     const [totalProductCount, setTotalProductCount] = useState(0);
-
-    const notify = (message) => {
-        toast.warn(message, {
-            position: toast.POSITION.TOP_CENTER
-        });
-    }
+    const { handleDelete } = UseProductDelete(
+        products,
+        setProducts,
+        changeState,
+        setChangeState);
 
     useEffect(() => {
-        const url = `https://protected-waters-02155.herokuapp.com/products?limit=${limit}&pageNumber=${pageNumber}}`;
+        const url = `http://localhost:5000/products?limit=${limit}&pageNumber=${pageNumber}}`;
         setIsLoading(true);
         (async () => {
             try {
@@ -43,31 +41,6 @@ const InventoryList = () => {
         })()
     }, [changeState, limit, pageNumber])
 
-    const handleDelete = async productId => {
-        const url = `https://protected-waters-02155.herokuapp.com/delete-product/${productId}`
-        try {
-            swal({
-                title: "Are your sure?",
-                text: "Deleting can't be undone",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-                safeMode: false
-            })
-                .then(async (isOkay) => {
-                    if (isOkay) {
-                        const { data } = await axios.delete(url)
-                        if (data.success) {
-                            const remainingProducts = products.filter(product => product._id !== productId);
-                            setProducts(remainingProducts);
-                            notify('Successfully deleted')
-                        }
-                    }
-                });
-        } catch (err) {
-            console.log(err);
-        }
-    }
 
     return (
         <div className="py-5">

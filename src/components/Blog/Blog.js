@@ -6,10 +6,10 @@ import './Blogs.css';
 
 const Blog = () => {
     return (
-        <div className='md:mb-0'>
+        <div>
             <PageTitle title="Blog" />
             <Navbar />
-            <div className='w-4/5 mx-auto h-[80vh] blog-container mt-20 md:mb-0'>
+            <div className='w-4/5 mx-auto h-[100vh] xl:h-[85vh] 2xl:pt-20 mb-[610px] xl:mb-[0]'>
                 <div className='my-5'>
                     <h1 className='text-xl font-semibold'>Difference between JavaScript vs NodeJS</h1>
                     <ul>
