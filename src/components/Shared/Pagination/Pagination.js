@@ -11,7 +11,6 @@ const Pagination = ({
     totalProductCount,
     userTotalProducts,
     limit }) => {
-    console.log(totalPage);
 
     const prevPage = () => {
         if (pageNumber > 0) {
@@ -41,7 +40,8 @@ const Pagination = ({
                             [...Array(totalPage).keys()]
                                 .map(pgNumber =>
                                     <button key={pgNumber}
-                                        className={`border p-2 hover:bg-blue-900 shadow-lg hover:text-white duration-100 ${pageNumber === pgNumber ? 'bg-blue-900 text-white' : ''}`}
+                                        className={`border p-2 hover:bg-blue-900 shadow-lg hover:text-white duration-100
+                                         ${pageNumber === pgNumber ? 'bg-blue-900 text-white' : ''}`}
                                         onClick={() => setPageNumber(pgNumber)}>
                                         {pgNumber + 1}
                                     </button>

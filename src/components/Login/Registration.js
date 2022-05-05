@@ -1,32 +1,30 @@
+import { useEffect } from 'react';
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { AiOutlineMail, AiOutlineUnlock, AiOutlineUser } from "react-icons/ai";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../Firebase/Firebase.config';
 import Spinner from '../Shared/Spinner/Spinner';
 import SocialLogin from './SocialLogin';
 import PageTitle from '../Shared/PageTitle/PageTitle';
 import axios from 'axios';
+import UseNotify from '../../Hooks/UseNotify';
+import UseDisplayError from '../../Hooks/UseDisplayError';
 
 const Registration = () => {
+    const { notifyWarning } = UseNotify();
+    const { displayError } = UseDisplayError();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
 
-    const notify = (message) => {
-        toast.warn(message, {
-            position: toast.POSITION.TOP_CENTER
-        });
-    }
-
     const [
         createUserWithEmailAndPassword,
-        emailUser,
-        emailLoading,
-        ,
+        user,
+        loading,
+        error
     ] = useCreateUserWithEmailAndPassword(auth);
     const [updateProfile, ,] = useUpdateProfile(auth);
+
 
     const handleRegistration = e => {
         e.preventDefault();
@@ -34,29 +32,38 @@ const Registration = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
         const confirmPassword = e.target.confirmPassword.value;
-        if (name === '') {
-            notify('Provide your name');
-        } else if (email === '') {
-            notify('Provide your email');
-        } else if (password === '') {
-            notify('Provide a password');
-        } else if (!(confirmPassword === password)) {
-            notify('Password mismatch');
-        } else {
-            createUserWithEmailAndPassword(email, password)
-                .then(async (res) => {
-                    await updateProfile({ displayName: name })
-                    notify('Account created successfully');
-                })
+
+        switch (true) {
+            case (!name):
+                notifyWarning('Provide your name');
+                break;
+            case (!email):
+                notifyWarning('Provide your email');
+                break;
+            case (!password):
+                notifyWarning('Provide a password');
+                break;
+            case (!(confirmPassword === password)):
+                notifyWarning('Password mismatch');
+                break;
+            default:
+                createUserWithEmailAndPassword(email, password)
+                    .then(async (res) => {
+                        await updateProfile({ displayName: name })
+                    })
         }
     }
 
-    if (emailLoading) {
+    // Display error
+    useEffect(() => { if (error || user) displayError(error, user) }, [error, user, displayError]);
+
+    if (loading) {
         return <Spinner />
     }
-    if (emailUser) {
+
+    if (user) {
         (async () => {
-            const { data } = await axios.post('http://localhost:5000/login', { email: emailUser.user?.email })
+            const { data } = await axios.post('https://protected-waters-02155.herokuapp.com/login', { email: user.user?.email })
             localStorage.setItem('accessToken', data);
         })();
         navigate(from, { replace: true });
@@ -107,7 +114,10 @@ const Registration = () => {
                 </small>
                 <SocialLogin />
             </div>
-            <button onClick={() => navigate('/home')} className='mt-5 text-xl hover:text-blue-800 underline'>Back To Home</button>
+            <button onClick={() => navigate('/home')}
+                className='mt-5 text-md hover:text-blue-800 underline'>
+                Back To Home
+            </button>
         </div>
     );
 };

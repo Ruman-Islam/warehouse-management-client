@@ -1,42 +1,36 @@
-import React, { useEffect } from 'react';
+// import React, { useEffect } from 'react';
 import { useSignInWithFacebook, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../Firebase/Firebase.config';
 import googleLogo from '../../assets/images/google-logo.png';
 import facebookLogo from '../../assets/images/facebook-logo.png';
 import Spinner from '../Shared/Spinner/Spinner';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import axios from 'axios';
+// import UseDisplayError from '../../Hooks/UseDisplayError';
 
 const SocialLogin = () => {
     const navigate = useNavigate();
+    // const { displayError } = UseDisplayError();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
 
-    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
-    const [signInWithFacebook, facebookUser, facebookLoading, facebookError] = useSignInWithFacebook(auth);
+    const [signInWithGoogle, googleUser, googleLoading,] = useSignInWithGoogle(auth);
+    const [signInWithFacebook, facebookUser, facebookLoading,] = useSignInWithFacebook(auth);
 
-    const notify = (message) => {
-        toast.warn(message, {
-            position: toast.POSITION.TOP_CENTER
-        });
-    }
 
-    useEffect(() => {
-        if (googleError || facebookError) {
-            const err = (googleError ? googleError.message?.split('/')[1] : facebookError.message?.split('/')[1]);
-            const errorMessage = err.split(")")[0];
-            if (errorMessage) { notify(errorMessage) };
-        }
-    }, [googleError, facebookError])
+    // useEffect(() => {
+    //     if (googleError || facebookError) {
+    //         googleError ? displayError(googleError) : displayError(facebookError)
+    //     }
+    // }, [googleError, facebookError, displayError]);
 
     if (googleLoading || facebookLoading) {
-        return <Spinner SocialLogin />;
+        return <Spinner SocialLogin />
     }
 
     if (googleUser || facebookUser) {
         (async () => {
-            const { data } = await axios.post('http://localhost:5000/login', {
+            const { data } = await axios.post('https://protected-waters-02155.herokuapp.com/login', {
                 email: (googleUser ? googleUser.user?.email : facebookUser.user?.email)
             })
             localStorage.setItem('accessToken', data);

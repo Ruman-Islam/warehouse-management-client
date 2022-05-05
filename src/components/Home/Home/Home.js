@@ -13,7 +13,7 @@ import PageTitle from '../../Shared/PageTitle/PageTitle';
 const Home = () => {
     const navigate = useNavigate();
     return (
-        <div>
+        <div className='animation'>
             <div><Navbar /></div>
             <div><Banner /></div><hr />
             <div><Inventories isHome />

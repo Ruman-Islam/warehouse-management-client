@@ -1,19 +1,16 @@
 import React from 'react';
 import { useAuthState, useSendEmailVerification } from 'react-firebase-hooks/auth';
-import { Navigate, useLocation } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../Firebase/Firebase.config';
+import UseNotify from '../../Hooks/UseNotify';
 import Spinner from '../Shared/Spinner/Spinner';
+
 const PrivateRoute = ({ children }) => {
+    const { notifySuccess } = UseNotify();
+    const navigate = useNavigate();
     const location = useLocation();
     const [user, loading,] = useAuthState(auth);
     const [sendEmailVerification, sending,] = useSendEmailVerification(auth);
-
-    const notify = (message) => {
-        toast.success(message, {
-            position: toast.POSITION.TOP_CENTER
-        });
-    }
 
     if (loading || sending) { // Preventing redirecting to login page //
         return <Spinner />
@@ -32,10 +29,15 @@ const PrivateRoute = ({ children }) => {
                     onClick={async () => {
                         await sendEmailVerification()
                             .then(() => {
-                                notify("A code has been sent to your email");
+                                notifySuccess("A code has been sent to your email");
                             });
                     }}>
                     Send Code
+                </button>
+                <small className='my-2'>or</small>
+                <button onClick={() => navigate('/home')}
+                    className='text-md hover:text-blue-800 underline'>
+                    Back To Home
                 </button>
             </div>
         )

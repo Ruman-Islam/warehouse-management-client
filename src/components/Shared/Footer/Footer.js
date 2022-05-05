@@ -29,21 +29,21 @@ const Footer = () => {
             <div className='flex flex-col md:flex-row justify-around px-16 md:px-28 py-5 md:py-20'>
                 <div className='md:w-1/4 w-full mb-5 md:mb-0'>
                     <h1 className='primary-color text-center md:text-left text-3xl font-extrabold'>Shelter</h1>
-                    <div className='flex flex-col md:flex-row justify-between items-center my-5'>
-                        <div>
+                    <div className='flex flex-col md:flex-row justify-between items-center my-5 w-6/6'>
+                        <div className='basis-1/12 mr-0 xl:mr-2'>
                             <img src={supportIcon} alt="" />
                         </div>
-                        <div className='mr-0 md:mr-32 text-center md:text-left'>
-                            <p className='text-sm'>Call Customer Services, We Support 24/7:</p>
+                        <div className='basis-12/12 mr-auto text-center md:text-left'>
+                            <p className='text-xs'>Call Customer Services, We Support 24/7</p>
                             <p className='text-sm font-bold'>+8801536160661</p>
                         </div>
                     </div>
-                    <div className='flex flex-col md:flex-row justify-between items-center my-5'>
-                        <div>
+                    <div className='flex flex-col md:flex-row justify-between items-center my-5 w-6/6'>
+                        <div className='basis-1/12 mr-0 xl:mr-2'>
                             <img src={addressIcon} alt="" />
                         </div>
-                        <div className='md:mr-48 text-center md:text-left'>
-                            <p className='text-sm'>Address:</p>
+                        <div className='basis-12/12 mr-auto text-center md:text-left'>
+                            <p className='text-xs'>Address:</p>
                             <p className='text-sm font-bold'>PO Box 1622 Khilgaon, Dhaka</p>
                         </div>
                     </div>
@@ -65,7 +65,7 @@ const Footer = () => {
                     <p className='my-1 hover:text-sky-600 cursor-pointer duration-200 text-sm'>Privacy Policy</p>
                 </div>
             </div>
-            <div className='flex px-2 py-5 justify-center md:justify-start text-xs md:px-64 flex-wrap border'>
+            <div className='flex px-2 py-5 justify-center md:justify-start text-xs xl:px-52 2xl:px-64 flex-wrap border'>
                 <p>Nokia</p> <span className='mx-1 font-semibold text-slate-500'> |</span>
                 <p>Samsung</p> <span className='mx-1 font-semibold text-slate-500'> |</span>
                 <p>HTC</p> <span className='mx-1 font-semibold text-slate-500'> |</span>
@@ -88,7 +88,7 @@ const Footer = () => {
                 <p>Huawei</p> <span className='mx-1 font-semibold text-slate-500'> |</span>
                 <p>Zippo</p>
             </div>
-            <div className='ml-0 text-center md:text-left text-xs md:text-lg md:ml-64 my-5'>Copyright ©{year} Ruman Islam. All rights reserved.</div>
+            <div className='ml-0 text-center md:text-left text-xs md:text-md md:ml-64 my-5'>Copyright ©{year} Ruman Islam. All rights reserved.</div>
         </div>
     );
 };

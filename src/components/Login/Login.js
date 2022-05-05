@@ -1,70 +1,56 @@
-import React, { useEffect, useState } from 'react';
-import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import React, { useEffect } from 'react';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { AiOutlineMail, AiOutlineUnlock } from "react-icons/ai";
 import { useLocation, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import auth from '../../Firebase/Firebase.config';
 import Spinner from '../Shared/Spinner/Spinner';
 import SocialLogin from './SocialLogin';
 import PageTitle from '../Shared/PageTitle/PageTitle';
 import axios from 'axios';
+import UseNotify from '../../Hooks/UseNotify';
+import UseDisplayError from '../../Hooks/UseDisplayError';
 
 const Login = () => {
+    const { notifyWarning } = UseNotify();
+    const { displayError } = UseDisplayError();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
-    const [email, setEmail] = useState('');
-
-    const notify = (message) => {
-        toast.warn(message, {
-            position: toast.POSITION.TOP_CENTER
-        });
-    }
 
     const [
         signInWithEmailAndPassword,
         user,
         loading,
-        userError,
+        error,
     ] = useSignInWithEmailAndPassword(auth);
-    const [sendPasswordResetEmail, sending, resetError] = useSendPasswordResetEmail(auth);
 
     const handleLogin = async e => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
         if (email === '') {
-            notify('Enter email');
+            notifyWarning('Please enter an email');
         } else if (password === '') {
-            notify('Provide a password');
+            notifyWarning('Provide a password');
         } else {
-            signInWithEmailAndPassword(email, password)
+            signInWithEmailAndPassword(email, password);
         }
     }
 
-    // const handleEmail = e => {
-    //     const name = e.target.email.value;
-    // }
+    // Display error
+    useEffect(() => { if (error) displayError(error) }, [error, displayError]);
 
-
-    useEffect(() => {
-        if (userError || resetError) {
-            const err = (userError ? userError.message?.split('/')[1] : resetError.message?.split('/')[1]);
-            const userErrorMessage = err.split(")")[0];
-            if (userErrorMessage) { notify(userErrorMessage); }
-        }
-    }, [userError, resetError])
-
-    if (loading || sending) {
+    if (loading) {
         return <Spinner />
-    }
+    };
+
     if (user) {
         (async () => {
-            const { data } = await axios.post('http://localhost:5000/login', { email: user.user?.email })
+            const { data } = await axios.post('https://protected-waters-02155.herokuapp.com/login', { email: user.user?.email })
             localStorage.setItem('accessToken', data);
         })();
         navigate(from, { replace: true });
-    }
+    };
 
     return (
         <div className='w-full flex flex-col justify-center items-center h-full mt-10 xl:mt-24 2xl:mt-44'>
@@ -78,7 +64,7 @@ const Login = () => {
                         <div className='border p-3'>
                             <AiOutlineMail />
                         </div>
-                        <input onChange={e => setEmail(e.target.value)}
+                        <input
                             className='border border-l-0 w-full p-3 text-xs my-2 outline-0 ' type="email" placeholder='Email' name="email" />
                     </div>
                     <div className='flex justify-center items-center'>
@@ -90,12 +76,10 @@ const Login = () => {
                     <small
                         className='text-center text-slate-500'>
                         Forgot your
-                        <span onClick={async () => {
-                            await sendPasswordResetEmail(email)
-                            if (email) { notify('A reset code has been sent') }
-                            setEmail('');
-                        }}
-                            className='primary-color cursor-pointer'> Password?</span>
+                        <span onClick={() => navigate('/reset-password')}
+                            className='primary-color cursor-pointer pl-1'>
+                            Password?
+                        </span>
                     </small>
                     <input className='background-color text-white mt-5 py-2 cursor-pointer' type="submit" value="Log in" />
                 </form>
@@ -109,7 +93,10 @@ const Login = () => {
                 </small>
                 <SocialLogin />
             </div>
-            <button onClick={() => navigate('/home')} className='mt-5 text-xl hover:text-blue-800 underline'>Back To Home</button>
+            <button onClick={() => navigate('/home')}
+                className='mt-5 text-md hover:text-blue-800 underline'>
+                Back To Home
+            </button>
         </div>
     );
 };

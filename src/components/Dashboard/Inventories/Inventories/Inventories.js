@@ -1,6 +1,5 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import UseGetProducts from "../../../../Hooks/UseGetProducts";
 import Product from "../../../Product/Product";
 import Footer from "../../../Shared/Footer/Footer";
 import Navbar from "../../../Shared/Navbar/Navbar";
@@ -9,26 +8,7 @@ import Spinner from "../../../Shared/Spinner/Spinner";
 
 const Inventories = ({ isHome }) => {
     const location = useLocation();
-    const [products, setProducts] = useState([]);
-    const [changeState, setStateChange] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-
-    useEffect(() => {
-        const url = "http://localhost:5000/products";
-        setIsLoading(true);
-        (async () => {
-            try {
-                const { data } = await axios.get(url)
-                setProducts(data.products);
-                setIsLoading(false);
-            } catch (err) {
-                if (err.response.status === 404) {
-                    setStateChange(!changeState);
-                    setIsLoading(false);
-                }
-            }
-        })()
-    }, [changeState])
+    const { products, isLoading } = UseGetProducts();
 
     return (
         <>
@@ -44,7 +24,7 @@ const Inventories = ({ isHome }) => {
                     <>
                         {isLoading ? <Spinner />
                             :
-                            <div className='w-2/3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mx-auto'>
+                            <div className='w-2/3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mx-auto animation'>
                                 {isHome ?
                                     products?.slice(0, 6).map(product => <Product key={product._id} product={product} />)
                                     :

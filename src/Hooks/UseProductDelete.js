@@ -1,21 +1,14 @@
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import { useState } from 'react';
 import swal from 'sweetalert';
+import UseNotify from './UseNotify';
 
-const UseProductDelete = (
-    products,
-    setProducts,
-    changeState,
-    setChangeState) => {
-
-    const notify = (message) => {
-        toast.success(message, {
-            position: toast.POSITION.TOP_CENTER
-        });
-    }
+const UseProductDelete = (products, setProducts) => {
+    const { notifySuccess } = UseNotify();
+    const [changeState, setChangeState] = useState(false);
 
     const handleDelete = async productId => {
-        const url = `http://localhost:5000/delete-product/${productId}`
+        const url = `https://protected-waters-02155.herokuapp.com/delete-product/${productId}`;
         try {
             swal({
                 title: "Are your sure?",
@@ -31,7 +24,7 @@ const UseProductDelete = (
                         if (data.success) {
                             const remainingProducts = products.filter(product => product._id !== productId);
                             setProducts(remainingProducts);
-                            notify('Successfully deleted');
+                            notifySuccess('Successfully deleted');
                             setChangeState(!changeState);
                         }
                     }

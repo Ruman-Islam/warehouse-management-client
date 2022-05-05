@@ -53,11 +53,11 @@ const Navbar = () => {
                             Manage Inventory
                         </CustomLink>
                     </li>
-                    <li className='px-3 text-md font-semibold'>
+                    {/* <li className='px-3 text-md font-semibold'>
                         <CustomLink to='/dashboard'>
                             Dashboard
                         </CustomLink>
-                    </li>
+                    </li> */}
                     <li className='px-3 text-md font-semibold'>
                         <CustomLink to='/blog'>Blog</CustomLink>
                     </li>

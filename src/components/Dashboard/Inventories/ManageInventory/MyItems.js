@@ -1,29 +1,26 @@
-import React from 'react';
+import InventoriesTable from './InventoriesTable';
+import PageTitle from '../../../Shared/PageTitle/PageTitle';
 import Spinner from '../../../Shared/Spinner/Spinner';
 import Pagination from '../../../Shared/Pagination/Pagination';
 import UseProductDelete from '../../../../Hooks/UseProductDelete';
-import InventoriesTable from '../ManageInventory/InventoriesTable';
 import UseGetProducts from '../../../../Hooks/UseGetProducts';
-import './InventoryList.css';
 
-const InventoryList = () => {
-    const {
-        products,
+const MyItems = () => {
+    const { products,
         setProducts,
-        totalProductCount,
-        isLoading,
+        userTotalProducts,
         totalPage,
+        isLoading,
         pageNumber,
         setPageNumber,
         limit,
-        setLimit
-
-    } = UseGetProducts('inventory-list');
+        setLimit } = UseGetProducts('my-items');
     const { handleDelete } = UseProductDelete(products, setProducts);
 
     return (
         <div className="py-5">
-            <h1 className='ml-5 mb-5 text-sm'>Total {totalProductCount} results</h1>
+            <PageTitle title="My Items" />
+            <h1 className='ml-5 mb-5 text-sm'>Total {userTotalProducts} results</h1>
             <>
                 {isLoading ? <Spinner />
                     :
@@ -31,17 +28,15 @@ const InventoryList = () => {
                 }
             </>
             <Pagination
-                isInventoryList
-                limit={limit}
-                isLoading={isLoading}
                 totalPage={totalPage}
-                pageNumber={pageNumber}
-                totalProductCount={totalProductCount}
+                isLoading={isLoading}
                 setPageNumber={setPageNumber}
+                pageNumber={pageNumber}
+                userTotalProducts={userTotalProducts}
                 setLimit={setLimit}
-            />
+                limit={limit} />
         </div>
     );
 };
 
-export default InventoryList;
+export default MyItems;

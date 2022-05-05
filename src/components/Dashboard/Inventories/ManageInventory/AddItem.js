@@ -1,18 +1,12 @@
 import axios from 'axios';
-import { toast } from 'react-toastify';
 import { useForm } from "react-hook-form";
-// import formBackground from '../../assets/images/formbackground.jpg';
+import PageTitle from '../../../Shared/PageTitle/PageTitle';
+import UseNotify from '../../../../Hooks/UseNotify';
 import './AddItem.css';
-import PageTitle from '../Shared/PageTitle/PageTitle';
 
 const AddItem = () => {
+    const { notifySuccess, notifyWarning } = UseNotify();
     const { register, handleSubmit } = useForm();
-
-    const notify = message => {
-        toast.success(message, {
-            position: toast.POSITION.TOP_CENTER
-        });
-    }
 
     const onSubmit = async (data, e) => {
         const productInfo = data;
@@ -22,40 +16,40 @@ const AddItem = () => {
 
         switch (true) {
             case (!productInfo.email):
-                notify('Opps! you missed email');
+                notifyWarning('Opps! you missed email');
                 break;
             case (!productInfo.productName):
-                notify('Opps! you missed product name');
+                notifyWarning('Opps! you missed product name');
                 break;
             case (!productInfo.price):
-                notify('Opps! you missed price');
+                notifyWarning('Opps! you missed price');
                 break;
             case (!productInfo.quantity):
-                notify('Opps! you missed quantity');
+                notifyWarning('Opps! you missed quantity');
                 break;
             case (!productInfo.supplier):
-                notify('Opps! you missed supplier name');
+                notifyWarning('Opps! you missed supplier name');
                 break;
             case (!productInfo.availability):
-                notify('Opps! you missed stock');
+                notifyWarning('Opps! you missed stock');
                 break;
             case (!productInfo.rating):
-                notify('Opps! you missed rating');
+                notifyWarning('Opps! you missed rating');
                 break;
             case (!productInfo.img):
-                notify('Opps! you missed imageURL');
+                notifyWarning('Opps! you missed imageURL');
                 break;
             case (!productInfo.tags[0]):
-                notify('Opps! you missed tags');
+                notifyWarning('Opps! you missed tags');
                 break;
             case (!productInfo.description):
-                notify('Opps! you missed description');
+                notifyWarning('Opps! you missed description');
                 break;
             default:
-                await axios.post("http://localhost:5000/add-product", productInfo)
+                await axios.post("https://protected-waters-02155.herokuapp.com/add-product", productInfo)
                     .then(res => {
-                        notify("Product successfully added ");
-                        // e.target.reset();
+                        notifySuccess("Product successfully added ");
+                        e.target.reset();
                     })
         }
     };

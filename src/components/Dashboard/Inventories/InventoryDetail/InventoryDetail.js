@@ -5,54 +5,22 @@ import { AiFillCheckSquare, AiFillCloseSquare, AiOutlineDoubleRight } from "reac
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate, useParams } from 'react-router-dom';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { toast } from 'react-toastify';
 import Spinner from '../../../Shared/Spinner/Spinner';
 import Navbar from '../../../Shared/Navbar/Navbar';
 import Footer from '../../../Shared/Footer/Footer';
+import UseNotify from '../../../../Hooks/UseNotify';
 
 const InventoryDetail = () => {
+    const { notifySuccess, notifyWarning, notifyError } = UseNotify();
     const navigate = useNavigate();
     const { productId } = useParams();
-    console.log(productId);
     const [product, setProduct] = useState({});
     const [isLoading, setIsLoading] = useState(false);
     const [quantity, setQuantity] = useState(0);
 
-    const notify = (message) => {
-        toast.warn(message, {
-            position: toast.POSITION.TOP_CENTER
-        });
-    }
-
-    const handleQuantity = (e, id, isUpdate) => {
-        e.preventDefault();
-        let newQuantity;
-        const inputQuantity = +(e.target?.quantity?.value);
-        const currentQuantity = +quantity;
-        console.log(inputQuantity, quantity);
-        if (inputQuantity < 0) {
-            notify("Input positive value!");
-            return;
-        }
-        if (quantity > 0 || inputQuantity) {
-            newQuantity = isUpdate ? inputQuantity + currentQuantity : currentQuantity - 1;
-            const url = `http://localhost:5000/product/${id}`;
-            (async () => {
-                try {
-                    const { data } = await axios.put(url, { newQuantity })
-                    if (data.success) setQuantity(newQuantity);
-                    notify(`${isUpdate ? 'Stock update successfully' : 'Deliverd successfully'}`)
-                } catch (err) {
-                    console.log(err);
-                }
-            })()
-        }
-        isUpdate && e.target.reset();
-    }
-
     useEffect(() => {
         setIsLoading(true);
-        const url = `http://localhost:5000/product/${productId}`;
+        const url = `https://protected-waters-02155.herokuapp.com/product/${productId}`;
         (async () => {
             try {
                 const { data } = await axios.get(url)
@@ -60,10 +28,38 @@ const InventoryDetail = () => {
                 setQuantity(data.product.quantity);
                 setIsLoading(false);
             } catch (err) {
-                console.log(err);
+                // console.log(err);
+                // notifyError(err);
+                setIsLoading(false);
             }
-        })()
-    }, [productId])
+        })();
+    }, [productId]);
+
+    const handleQuantity = (e, id, isUpdate) => {
+        e.preventDefault();
+        let newQuantity;
+        const inputQuantity = +(e.target?.quantity?.value);
+        const currentQuantity = +quantity;
+        if (inputQuantity < 0) {
+            console.log('object');
+            notifyWarning("Input positive value!");
+            return;
+        }
+        if (quantity > 0 || inputQuantity) {
+            newQuantity = isUpdate ? inputQuantity + currentQuantity : currentQuantity - 1;
+            const url = `https://protected-waters-02155.herokuapp.com/product/${id}`;
+            (async () => {
+                try {
+                    const { data } = await axios.put(url, { newQuantity })
+                    if (data.success) setQuantity(newQuantity);
+                    notifySuccess(`${isUpdate ? 'Stock update successfully' : 'Deliverd successfully'}`)
+                } catch (err) {
+                    notifyError(err);
+                }
+            })()
+        }
+        isUpdate && e.target.reset();
+    }
 
     return (
         <>
@@ -71,7 +67,7 @@ const InventoryDetail = () => {
             {isLoading ? <Spinner />
                 :
                 <div>
-                    <div className='grid grid-cols-1 md:grid-cols-2 w-2/3 mx-auto my-10 md:my-20'>
+                    <div className='grid grid-cols-1 md:grid-cols-2 w-2/3 mx-auto my-10 md:my-20 animation'>
                         <div className='border border-slate-200 rounded'>
                             <img className='w-full' src={product.img} alt="" />
                         </div>
