@@ -46,7 +46,7 @@ const AddItem = () => {
                 notifyWarning('Opps! you missed description');
                 break;
             default:
-                await axios.post("http://localhost:5000/add-product", productInfo)
+                await axios.post("https://protected-waters-02155.herokuapp.com/add-product", productInfo)
                     .then(res => {
                         notifySuccess("Product successfully added ");
                         e.target.reset();

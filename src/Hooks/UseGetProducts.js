@@ -20,11 +20,11 @@ const UseGetProducts = (message) => {
 
     let url;
     if (message === 'my-items') {
-        url = `http://localhost:5000/products-user?email=${user?.email}&limit=${limit}&pageNumber=${pageNumber}`;
+        url = `https://protected-waters-02155.herokuapp.com/products-user?email=${user?.email}&limit=${limit}&pageNumber=${pageNumber}`;
     } else if (message === 'inventory-list') {
-        url = `http://localhost:5000/products?limit=${limit}&pageNumber=${pageNumber}}`;
+        url = `https://protected-waters-02155.herokuapp.com/products?limit=${limit}&pageNumber=${pageNumber}}`;
     } else {
-        url = "http://localhost:5000/products";
+        url = "https://protected-waters-02155.herokuapp.com/products";
     }
 
     useEffect(() => {

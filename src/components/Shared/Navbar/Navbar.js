@@ -48,6 +48,9 @@ const Navbar = () => {
                         <CustomLink to='/home'>Home</CustomLink>
                     </li>
                     <li className='px-3 text-md font-semibold'>
+                        <CustomLink to='/inventories'>Inventories</CustomLink>
+                    </li>
+                    <li className='px-3 text-md font-semibold'>
                         <CustomLink to='/dashboard'>
                             Manage Inventory
                         </CustomLink>

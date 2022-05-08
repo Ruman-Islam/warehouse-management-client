@@ -20,7 +20,7 @@ const InventoryDetail = () => {
 
     useEffect(() => {
         setIsLoading(true);
-        const url = `http://localhost:5000/product/${productId}`;
+        const url = `https://protected-waters-02155.herokuapp.com/product/${productId}`;
         (async () => {
             try {
                 const { data } = await axios.get(url)
@@ -46,7 +46,7 @@ const InventoryDetail = () => {
         }
         if (quantity > 0 || inputQuantity) {
             newQuantity = isUpdate ? inputQuantity + currentQuantity : currentQuantity - 1;
-            const url = `http://localhost:5000/product/${id}`;
+            const url = `https://protected-waters-02155.herokuapp.com/product/${id}`;
             (async () => {
                 try {
                     const { data } = await axios.put(url, { newQuantity })
@@ -81,7 +81,7 @@ const InventoryDetail = () => {
                             </Rating>
                             <p className='flex text-xs'><span className='mr-5'>AVAILABILITY :</span>
                                 <span className='flex items-center text-green-500'>
-                                    <span className='mr-2'>IN STOCK</span>{product.availability === 'yes' ?
+                                    <span className='mr-2'>IN STOCK</span>{quantity > 0 ?
                                         <AiFillCheckSquare />
                                         :
                                         <span className='text-red-600'><AiFillCloseSquare /></span>}

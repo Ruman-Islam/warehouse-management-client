@@ -8,7 +8,7 @@ const TopSellers = () => {
     const [isLoading, setIsLoading] = useState(false);
     useEffect(() => {
         setIsLoading(true);
-        const url = "http://localhost:5000/top-sellers";
+        const url = "https://protected-waters-02155.herokuapp.com/top-sellers";
         (async () => {
             try {
                 const { data } = await axios.get(url)
