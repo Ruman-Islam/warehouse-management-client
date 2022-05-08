@@ -7,7 +7,7 @@ import './Banner.css';
 
 const Banner = () => {
     return (
-        <div className='flex flex-col md:flex-row h-[70vh] xl:h-[65vh] 2xl:h-[80vh] justify-center items-center w-4/5 mx-auto my-20 xl:mt-0'>
+        <div className='flex flex-col md:flex-row h-[40vh] xl:h-[65vh] 2xl:h-[80vh] justify-center items-center w-4/5 mx-auto my-20 xl:mt-0'>
             <div className='relative basis-3/6 md:mt-0 hidden md:block'>
                 <div className="flex justify-end xl:w-4/6 2xl:w-4/5">
                     <img className="w-full xl:w-4/6 2xl:w-4/5" src={img3} alt="" />
@@ -20,7 +20,7 @@ const Banner = () => {
                 <div>
                     <div className='flex items-center text-xl xl:text-2xl 2xl:text-3xl text-red-500'>
                         <AiOutlineDoubleRight />
-                        <h2 className='pl-5 xl:my-0 2xl:my-5 font-bold'>ABOUT US</h2>
+                        <h2 className='pl-5 xl:my-0 2xl:my-5 font-bold'>DESTINY</h2>
                     </div>
                     <h1 className='text-2xl xl:text-3xl 2xl:text-5xl 2xl:leading-tight my-2 md:my-5'>We are trusted &amp; professional logistic company</h1>
                     <p>The Shelter is one of the trusted online gadgets warehouse in Bangladesh. SBD is all about world class electronic warehouse. We provide electronic and Gadgets warehouse facilities. We provide delivery within 24-48 hours throughout the whole Bangladesh.</p>

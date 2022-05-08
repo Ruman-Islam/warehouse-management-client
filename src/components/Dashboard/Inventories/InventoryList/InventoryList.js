@@ -5,8 +5,8 @@ import UseProductDelete from '../../../../Hooks/UseProductDelete';
 import InventoriesTable from '../ManageInventory/InventoriesTable';
 import UseGetProducts from '../../../../Hooks/UseGetProducts';
 import { AiOutlinePlus } from "react-icons/ai";
-import './InventoryList.css';
 import { useNavigate } from 'react-router-dom';
+import './InventoryList.css';
 
 const InventoryList = () => {
     const navigate = useNavigate();
@@ -21,7 +21,8 @@ const InventoryList = () => {
         limit,
         setLimit,
         changeState,
-        setChangeState
+        setChangeState,
+        error
     } = UseGetProducts('inventory-list');
     const { handleDelete } = UseProductDelete(products, setProducts, changeState, setChangeState);
 
@@ -42,7 +43,7 @@ const InventoryList = () => {
                         </div>
                     </div>
                     <div>
-                        <InventoriesTable products={products} handleDelete={handleDelete} />
+                        <InventoriesTable products={products} handleDelete={handleDelete} error={error} />
                     </div>
                     {totalProductCount !== 0 &&
                         <Pagination

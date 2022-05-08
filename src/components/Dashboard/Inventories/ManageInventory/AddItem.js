@@ -30,9 +30,6 @@ const AddItem = () => {
             case (!productInfo.supplier):
                 notifyWarning('Opps! you missed supplier name');
                 break;
-            case (!productInfo.availability):
-                notifyWarning('Opps! you missed stock');
-                break;
             case (!productInfo.rating):
                 notifyWarning('Opps! you missed rating');
                 break;
@@ -82,10 +79,6 @@ const AddItem = () => {
                     className='outline-0 rounded-lg border px-5 py-2 border-blue-900 mb-2'
                     placeholder='Supplier name'
                     name="supplierName" autoComplete="off" type="text" {...register("supplier")} />
-                <input
-                    className='outline-0 rounded-lg border px-5 py-2 border-blue-900 mb-2'
-                    placeholder='In stock?'
-                    name="availability" autoComplete="off" type="text" {...register("availability")} />
                 <input
                     className='outline-0 rounded-lg border px-5 py-2 border-blue-900 mb-2'
                     placeholder='Rating'

@@ -10,7 +10,6 @@ import {
 } from "react-icons/ai";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { signOut } from 'firebase/auth';
 import photoPlaceHolder from '../../../assets/images/photoplaceholder.jpg';
 import UseSignOut from "../../../Hooks/UseSignOut";
 import auth from '../../../Firebase/Firebase.config';
@@ -127,7 +126,7 @@ const Sidebar = ({ openNav, setOpenNav }) => {
                     </li>
                     <li className="absolute top-0 right-12 -translate-y-8">
                         <button
-                            onClick={() => signOut(auth) + navigate('/home')}
+                            onClick={handleSignOut}
                             className='text-lg font-semibold'
                         >Logout
                         </button>
@@ -142,14 +141,19 @@ const Sidebar = ({ openNav, setOpenNav }) => {
                     <li>
                         <button
                             onClick={() => navigate('/dashboard/my-items')}
-                            className={location.pathname === '/dashboard/my-items' && 'active-link'}
                         >Manage Items
                         </button>
                     </li>
                     {(location.pathname === '/dashboard/my-items' || location.pathname === '/dashboard/add-item') &&
                         <li>
-                            <li>My Items</li>
-                            <li>Add Item</li>
+                            <li
+                                className={location.pathname === '/dashboard/my-items' && 'active-link'}
+                                onClick={() => navigate('/dashboard/my-items')}
+                            >My Items</li>
+                            <li
+                                className={location.pathname === '/dashboard/add-item' && 'active-link'}
+                                onClick={() => navigate('/dashboard/add-item')}
+                            >Add Item</li>
                         </li>}
                 </ul>
             </aside>

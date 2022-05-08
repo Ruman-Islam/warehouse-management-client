@@ -17,6 +17,7 @@ const UseGetProducts = (message) => {
     const [limit, setLimit] = useState(14);
     const [pageNumber, setPageNumber] = useState(0);
     const [totalPage, setTotalPage] = useState(0);
+    const [error, setError] = useState('');
 
     let url;
     if (message === 'my-items') {
@@ -36,26 +37,42 @@ const UseGetProducts = (message) => {
                         authorization: `Bearer ${localStorage.getItem('accessToken')}`
                     }
                 })
-                if (!data.success) {
-                    setIsLoading(false);
-                    return
-                }
-                setProducts(data.products);
-                if (message === 'my-items') {
-                    setUserTotalProducts(data.count);
-                }
                 if (message === 'inventory-list') {
-                    setTotalProductCount(data.count);
+                    if (data.success) {
+                        setProducts(data.products);
+                        setTotalProductCount(data.count);
+                        setTotalPage(Math.ceil(data.count / limit));
+                        setIsLoading(false);
+                        return;
+                    }
+                } else if (message === 'my-items') {
+                    if (data.success) {
+                        setProducts(data.products);
+                        setUserTotalProducts(data.count);
+                        setTotalPage(Math.ceil(data.count / limit));
+                        setIsLoading(false);
+                        return;
+                    }
+                } else {
+                    setIsLoading(false);
+                    setProducts(data.products);
                 }
-                setTotalPage(Math.ceil(data.count / limit));
-                setIsLoading(false);
             } catch (err) {
-                console.log(err);
-                setChangeState(!changeState);
+                setIsLoading(false);
+                if (err.response.status === 404) {
+                    setError(err.response?.data?.message)
+                    return;
+                }
                 if (err.response.status === 403 || err.response.status === 401) {
                     setIsLoading(false);
                     signOut(auth);
                     navigate('/login');
+                    return;
+                }
+                if (err.response.status === 500) {
+                    setIsLoading(false);
+                    setError(err.response?.data?.message);
+                    return;
                 }
             }
         })()
@@ -73,7 +90,8 @@ const UseGetProducts = (message) => {
         setPageNumber,
         totalPage,
         changeState,
-        setChangeState
+        setChangeState,
+        error
     }
 }
 

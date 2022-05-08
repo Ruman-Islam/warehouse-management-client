@@ -16,6 +16,7 @@ const MyItems = () => {
         limit,
         changeState,
         setChangeState,
+        error,
         setLimit } = UseGetProducts('my-items');
     const { handleDelete } = UseProductDelete(products, setProducts, changeState, setChangeState);
 
@@ -26,7 +27,7 @@ const MyItems = () => {
             <>
                 {isLoading ? <Spinner />
                     :
-                    <InventoriesTable products={products} handleDelete={handleDelete} />
+                    <InventoriesTable products={products} handleDelete={handleDelete} error={error} />
                 }
             </>
             {userTotalProducts !== 0 &&

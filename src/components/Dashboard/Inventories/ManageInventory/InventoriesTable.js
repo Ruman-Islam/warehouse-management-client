@@ -2,7 +2,7 @@ import React from 'react';
 import { AiFillCloseSquare, AiFillEdit } from "react-icons/ai";
 import { useNavigate } from 'react-router-dom';
 
-const InventoriesTable = ({ products, handleDelete }) => {
+const InventoriesTable = ({ products, handleDelete, error }) => {
     const navigate = useNavigate();
     let count = 0;
     return (
@@ -44,7 +44,7 @@ const InventoriesTable = ({ products, handleDelete }) => {
                             </tr>)}
                     </tbody>
                 </table>
-                {products.length === 0 && <h1 className='ml-3'>No data found</h1>}
+                {error && <h1 className='ml-3'>{error}</h1>}
             </div>
         </div>
     );
