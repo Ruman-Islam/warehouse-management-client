@@ -14,7 +14,7 @@ const UseGetProducts = (message) => {
     const [changeState, setChangeState] = useState(false);
     const [userTotalProducts, setUserTotalProducts] = useState(0);
     const [totalProductCount, setTotalProductCount] = useState(0);
-    const [limit, setLimit] = useState(10);
+    const [limit, setLimit] = useState(14);
     const [pageNumber, setPageNumber] = useState(0);
     const [totalPage, setTotalPage] = useState(0);
 

@@ -50,7 +50,7 @@ function App() {
           </Routes>
         </HelmetProvider>
       </div>
-      <ToastContainer toastStyle={{ backgroundColor: "background-color" }} />
+      <ToastContainer />
     </div>
   );
 }

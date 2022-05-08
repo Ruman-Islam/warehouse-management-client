@@ -8,12 +8,14 @@ import {
 } from "react-icons/ai";
 import { useNavigate } from 'react-router-dom';
 import auth from '../../../Firebase/Firebase.config';
+import useNav from '../../../Hooks/UseNav';
 import UseSignOut from '../../../Hooks/UseSignOut';
 import CustomLink from '../../CustomLink/CustomLink';
 import './Navbar.css';
 
 const Navbar = () => {
     const [openNav, setOpenNav] = useState(false);
+    const { navbar } = useNav();
     const [user, ,] = useAuthState(auth);
     const navigate = useNavigate();
     const { handleSignOut } = UseSignOut();
@@ -34,12 +36,13 @@ const Navbar = () => {
                     </ul>
                 </div>
             </nav>
-            <nav className='flex justify-start items-center background-color text-white'>
+            <nav className={`flex justify-start items-center background-color text-white ${navbar && 'hidden'}`}>
                 <div onClick={() => setOpenNav(!openNav)} className='w-12 h-8 md:hidden text-xl ml-5 flex items-center'>
                     {openNav ? <AiFillCaretUp /> : <AiOutlineAlignLeft />}
                 </div>
             </nav>
-            <nav className='background-color border border-l-0 border-r-0 border-b-0 border-t-1  text-white'>
+            <nav
+                className={`background-color border border-l-0 border-r-0 border-b-0 border-t-1 text-white flex items-center ${navbar && 'fixed w-full z-10 top-0 scrolly-background-color primary-color shadow-lg'}`}>
                 <ul className={`flex flex-col md:flex-row justify-center items-center py-2 w-full h-18 md:h-20 lg:h-12 absolute md:static ease-in duration-500 z-10 ${openNav ? 'top-20 nav' : 'top-[-200px]'}`}>
                     <li className='px-3 text-md font-semibold'>
                         <CustomLink to='/home'>Home</CustomLink>

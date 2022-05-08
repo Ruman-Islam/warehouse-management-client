@@ -4,7 +4,7 @@ const UseNotify = () => {
 
     const notifySuccess = (message) => {
         toast.success(message, {
-            theme: "dark",
+            theme: "red",
             position: toast.POSITION.TOP_CENTER
         });
     }

@@ -7,6 +7,7 @@
 :root {
     --primary-color: #00254B;
     --active-link-color: orange;
+    --scrollyBackgroundColor: white;
 }
 
 .primary-color{
@@ -15,6 +16,10 @@
 
 .background-color {
     background: var(--primary-color);
+}
+
+.scrolly-background-color {
+    background-color: var(--scrollyBackgroundColor);
 }
 
 .page-container {

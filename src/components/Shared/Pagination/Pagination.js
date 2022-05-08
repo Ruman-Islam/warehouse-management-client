@@ -56,7 +56,7 @@ const Pagination = ({
                     <div>
                         <select className='border shadow-lg p-2 ml-5 outline-none bg-transparent rounded-lg' defaultValue={limit}
                             onChange={(e) => setLimit(e.target.value)}>
-                            <option value="10">10</option>
+                            <option value="14">14</option>
                             <option value="20">20</option>
                             <option value="30">30</option>
                             <option value="40">40</option>
