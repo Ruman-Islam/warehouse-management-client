@@ -28,7 +28,7 @@ const Pagination = ({
     return (
         <>
             {isLoading ||
-                <div className='flex justify-center my-20 mx-auto'>
+                <div className='flex justify-center my-10 mx-auto'>
                     <>
                         <button
                             className='mr-5 text-lg duration-300 hover:scale-150 hover:text-blue-900'
@@ -54,7 +54,7 @@ const Pagination = ({
                         </button>
                     </>
                     <div>
-                        <select className='border shadow-lg p-2 ml-5 outline-none' defaultValue={limit}
+                        <select className='border shadow-lg p-2 ml-5 outline-none bg-transparent rounded-lg' defaultValue={limit}
                             onChange={(e) => setLimit(e.target.value)}>
                             <option value="10">10</option>
                             <option value="20">20</option>

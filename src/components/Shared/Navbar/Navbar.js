@@ -1,4 +1,3 @@
-import { signOut } from 'firebase/auth';
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import {
@@ -9,6 +8,7 @@ import {
 } from "react-icons/ai";
 import { useNavigate } from 'react-router-dom';
 import auth from '../../../Firebase/Firebase.config';
+import UseSignOut from '../../../Hooks/UseSignOut';
 import CustomLink from '../../CustomLink/CustomLink';
 import './Navbar.css';
 
@@ -16,6 +16,7 @@ const Navbar = () => {
     const [openNav, setOpenNav] = useState(false);
     const [user, ,] = useAuthState(auth);
     const navigate = useNavigate();
+    const { handleSignOut } = UseSignOut();
 
     return (
         <header className='w-full'>
@@ -24,7 +25,7 @@ const Navbar = () => {
                     <h1 className='text-2xl md:text-3xl lg:text-4xl'>Shelter</h1>
                     <ul className='flex text-xl md:text-2xl w-64 justify-evenly items-center'>
                         {user ? <li className='text-sm'>{user.displayName}</li> : <li><AiOutlineUser /></li>}
-                        {user ? <li onClick={() => signOut(auth)} className='text-lg cursor-pointer'>Logout</li>
+                        {user ? <li onClick={handleSignOut} className='text-lg cursor-pointer'>Logout</li>
                             :
                             <li onClick={() => navigate('/login')} className='text-lg cursor-pointer'>Login</li>
                         }
@@ -44,20 +45,10 @@ const Navbar = () => {
                         <CustomLink to='/home'>Home</CustomLink>
                     </li>
                     <li className='px-3 text-md font-semibold'>
-                        <CustomLink to='/inventories'>
-                            Inventory
-                        </CustomLink>
-                    </li>
-                    <li className='px-3 text-md font-semibold'>
                         <CustomLink to='/dashboard'>
                             Manage Inventory
                         </CustomLink>
                     </li>
-                    {/* <li className='px-3 text-md font-semibold'>
-                        <CustomLink to='/dashboard'>
-                            Dashboard
-                        </CustomLink>
-                    </li> */}
                     <li className='px-3 text-md font-semibold'>
                         <CustomLink to='/blog'>Blog</CustomLink>
                     </li>

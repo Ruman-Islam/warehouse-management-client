@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import auth from "../Firebase/Firebase.config";
 
 const UseGetProducts = (message) => {
+
     const navigate = useNavigate();
     const [user, ,] = useAuthState(auth);
     const [products, setProducts] = useState([]);
@@ -19,11 +20,11 @@ const UseGetProducts = (message) => {
 
     let url;
     if (message === 'my-items') {
-        url = `https://protected-waters-02155.herokuapp.com/products-user?email=${user?.email}&limit=${limit}&pageNumber=${pageNumber}`;
+        url = `http://localhost:5000/products-user?email=${user?.email}&limit=${limit}&pageNumber=${pageNumber}`;
     } else if (message === 'inventory-list') {
-        url = `https://protected-waters-02155.herokuapp.com/products?limit=${limit}&pageNumber=${pageNumber}}`;
+        url = `http://localhost:5000/products?limit=${limit}&pageNumber=${pageNumber}}`;
     } else {
-        url = "https://protected-waters-02155.herokuapp.com/products";
+        url = "http://localhost:5000/products";
     }
 
     useEffect(() => {
@@ -70,7 +71,9 @@ const UseGetProducts = (message) => {
         setLimit,
         pageNumber,
         setPageNumber,
-        totalPage
+        totalPage,
+        changeState,
+        setChangeState
     }
 }
 

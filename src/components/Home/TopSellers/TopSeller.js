@@ -7,7 +7,7 @@ import './TopSeller.css';
 const TopSeller = ({ seller }) => {
     const { sellerName, img, origin, rating } = seller;
     return (
-        <div className='rounded-b-lg group shadow-lg w-full h-96 seller-info-card'>
+        <div className='rounded-b-lg group shadow-lg w-full h-96 seller-info-card animation'>
             <div className='w-full h-full'>
                 <img className='w-full h-full object-cover' src={img} alt="" />
             </div>

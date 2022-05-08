@@ -20,7 +20,7 @@ const InventoryDetail = () => {
 
     useEffect(() => {
         setIsLoading(true);
-        const url = `https://protected-waters-02155.herokuapp.com/product/${productId}`;
+        const url = `http://localhost:5000/product/${productId}`;
         (async () => {
             try {
                 const { data } = await axios.get(url)
@@ -41,13 +41,12 @@ const InventoryDetail = () => {
         const inputQuantity = +(e.target?.quantity?.value);
         const currentQuantity = +quantity;
         if (inputQuantity < 0) {
-            console.log('object');
             notifyWarning("Input positive value!");
             return;
         }
         if (quantity > 0 || inputQuantity) {
             newQuantity = isUpdate ? inputQuantity + currentQuantity : currentQuantity - 1;
-            const url = `https://protected-waters-02155.herokuapp.com/product/${id}`;
+            const url = `http://localhost:5000/product/${id}`;
             (async () => {
                 try {
                     const { data } = await axios.put(url, { newQuantity })
@@ -107,7 +106,7 @@ const InventoryDetail = () => {
                                     </span>
                                     <button
                                         onClick={(e) => handleQuantity(e, product._id, false)}
-                                        className='text-white mt-5 md:mt-0 px-10 md:px-16 py-1 rounded text-md md:text-2xl background-color hover:bg-blue-900 duration-300'>
+                                        className='text-white mt-5 md:mt-0 px-10 md:px-12 py-1 rounded text-md md:text-xl background-color hover:bg-blue-900 duration-300'>
                                         Deliver
                                     </button>
                                 </div>

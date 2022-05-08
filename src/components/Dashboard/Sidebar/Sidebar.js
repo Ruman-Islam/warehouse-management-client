@@ -1,24 +1,26 @@
 import {
     AiOutlineHome,
-    AiOutlineFileAdd,
+    AiFillTool,
     AiOutlineOrderedList,
-    AiOutlineTag,
-    AiTwotoneAppstore,
     AiOutlineLogout,
     AiFillCaretUp,
-    AiOutlineAlignLeft
+    AiOutlineAlignLeft,
+    AiOutlinePlus,
+    AiOutlineAppstore
 } from "react-icons/ai";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
-import auth from '../../../Firebase/Firebase.config';
 import photoPlaceHolder from '../../../assets/images/photoplaceholder.jpg';
+import UseSignOut from "../../../Hooks/UseSignOut";
+import auth from '../../../Firebase/Firebase.config';
 import './Sidebar.css';
 
 const Sidebar = ({ openNav, setOpenNav }) => {
     const location = useLocation()
     const [user, ,] = useAuthState(auth);
     const navigate = useNavigate();
+    const { handleSignOut } = UseSignOut();
     return (
         <>
             <div onClick={() => setOpenNav(!openNav)} className='w-12 h-8 md:hidden text-xl ml-5 flex items-center'>
@@ -33,8 +35,8 @@ const Sidebar = ({ openNav, setOpenNav }) => {
                                 <img className='w-8 h-8 rounded-full' src={user?.photoURL ? user?.photoURL : photoPlaceHolder} alt="" />
                             </div>
                             <div className='button'>
-                                <span
-                                >{user?.displayName}
+                                <span>
+                                    {user?.displayName}
                                 </span>
                             </div>
                         </div>}
@@ -52,7 +54,7 @@ const Sidebar = ({ openNav, setOpenNav }) => {
                         <div
                             onClick={() => navigate('/dashboard/inventory-list')}
                             className='inner-container cursor-pointer'>
-                            <div className='icon'><AiTwotoneAppstore /></div>
+                            <div className='icon'><AiOutlineOrderedList /></div>
                             <div className='button'>
                                 <button
                                     className={
@@ -63,45 +65,46 @@ const Sidebar = ({ openNav, setOpenNav }) => {
                                 </button>
                             </div>
                         </div>
-                        <div
-                            onClick={() => navigate('/dashboard/inventories')}
-                            className='inner-container cursor-pointer'>
-                            <div className='icon'><AiOutlineOrderedList /></div>
-                            <div className='button'>
-                                <button
-                                    className={location.pathname === '/dashboard/inventories' && 'active-link'}
-                                >Inventories
-                                </button>
-                            </div>
-                        </div>
-                        {user?.email &&
-                            <div
-                                onClick={() => navigate('/dashboard/add-item')}
-                                className='inner-container cursor-pointer'>
-                                <div className='icon'><AiOutlineFileAdd /></div>
-                                <div className='button'>
-                                    <button
-                                        className={location.pathname === '/dashboard/add-item' && 'active-link'}
-                                    >Add Item
-                                    </button>
-                                </div>
-                            </div>}
                         {user?.email &&
                             <div
                                 onClick={() => navigate('/dashboard/my-items')}
                                 className='inner-container cursor-pointer'>
-                                <div className='icon'><AiOutlineTag /></div>
+                                <div className='icon'><AiFillTool /></div>
                                 <div className='button'>
-                                    <button
-                                        className={location.pathname === '/dashboard/my-items' && 'active-link'}
-                                    >My Items
+                                    <button>
+                                        Manage Items
                                     </button>
+                                </div>
+                            </div>}
+                        {(location.pathname === '/dashboard/my-items' || location.pathname === '/dashboard/add-item') &&
+                            <div className=" text-white flex flex-col px-8 text-xs animation">
+                                <div
+                                    onClick={() => navigate('/dashboard/my-items')}
+                                    className="inner-container cursor-pointer">
+                                    <div className='icon'><AiOutlineAppstore /></div>
+                                    <div className='button'>
+                                        <button
+                                            className={location.pathname === '/dashboard/my-items' && 'active-link'}>
+                                            My Items
+                                        </button>
+                                    </div>
+                                </div>
+                                <div
+                                    onClick={() => navigate('/dashboard/add-item')}
+                                    className="inner-container cursor-pointer">
+                                    <div className='icon'><AiOutlinePlus /></div>
+                                    <div className='button'>
+                                        <button
+                                            className={location.pathname === '/dashboard/add-item' && 'active-link'}>
+                                            Add Item
+                                        </button>
+                                    </div>
                                 </div>
                             </div>}
                     </div>
                     {user?.email &&
                         <div
-                            onClick={() => signOut(auth) + navigate('/home')}
+                            onClick={handleSignOut}
                             className='inner-container cursor-pointer'>
                             <div className='icon'><AiOutlineLogout /></div>
                             <div className='button'>
@@ -122,27 +125,6 @@ const Sidebar = ({ openNav, setOpenNav }) => {
                     <li className="absolute left-4 -translate-y-8">
                         <button className="font-semibold" onClick={() => navigate('/home')}>Home</button>
                     </li>
-                    <li>
-                        <button
-                            onClick={() => navigate('/dashboard/inventories')}
-                            className={location.pathname === '/dashboard/inventories' && 'active-link'}
-                        >Inventories
-                        </button>
-                    </li>
-                    <li>
-                        <button
-                            onClick={() => navigate('/dashboard/add-item')}
-                            className={location.pathname === '/dashboard/add-item' && 'active-link'}
-                        >Add Item
-                        </button>
-                    </li>
-                    <li>
-                        <button
-                            onClick={() => navigate('/dashboard/my-items')}
-                            className={location.pathname === '/dashboard/my-items' && 'active-link'}
-                        >My Items
-                        </button>
-                    </li>
                     <li className="absolute top-0 right-12 -translate-y-8">
                         <button
                             onClick={() => signOut(auth) + navigate('/home')}
@@ -157,6 +139,18 @@ const Sidebar = ({ openNav, setOpenNav }) => {
                         >Manage Inventory
                         </button>
                     </li>
+                    <li>
+                        <button
+                            onClick={() => navigate('/dashboard/my-items')}
+                            className={location.pathname === '/dashboard/my-items' && 'active-link'}
+                        >Manage Items
+                        </button>
+                    </li>
+                    {(location.pathname === '/dashboard/my-items' || location.pathname === '/dashboard/add-item') &&
+                        <li>
+                            <li>My Items</li>
+                            <li>Add Item</li>
+                        </li>}
                 </ul>
             </aside>
         </>

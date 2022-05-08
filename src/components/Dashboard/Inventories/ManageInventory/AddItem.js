@@ -46,7 +46,7 @@ const AddItem = () => {
                 notifyWarning('Opps! you missed description');
                 break;
             default:
-                await axios.post("https://protected-waters-02155.herokuapp.com/add-product", productInfo)
+                await axios.post("http://localhost:5000/add-product", productInfo)
                     .then(res => {
                         notifySuccess("Product successfully added ");
                         e.target.reset();
@@ -103,7 +103,7 @@ const AddItem = () => {
                     placeholder='Description'
                     name="description" rows="3" cols="50" {...register("description")} /> <br />
                 <button
-                    className='background-color px-10 py-1 text-white rounded-xl' type='submit'>
+                    className='background-color px-10 py-1 text-white rounded-xl hover:bg-blue-900 duration-300' type='submit'>
                     Add Product
                 </button>
             </form>

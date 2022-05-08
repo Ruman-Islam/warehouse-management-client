@@ -10,23 +10,24 @@
 .inner-container {
     color: white;
     width: 100%;
-    margin:  8px auto;
+    margin:  5px auto;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 5px 0;
+    transition: all .2s ease-in-out;
 }
 .inner-container:hover {
     background-color: rgba(255, 255, 255, 0.116);
 }
 .inner-container .icon, .button {
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 .inner-container .icon {
     flex-basis: 20%;
     display: flex;
-   font-size: 20px;
+   font-size: 1rem;
    justify-content: center;
 }
 .inner-container .button {
@@ -39,6 +40,7 @@
 }
 .active-link {
     color: var(--active-link-color);
+    transition: all .2s ease-in-out;
 }
 
 @media only screen and (max-width: 576px) {
