@@ -25,7 +25,7 @@ const Sidebar = ({ openNav, setOpenNav }) => {
             <div onClick={() => setOpenNav(!openNav)} className='w-12 h-8 md:hidden text-xl ml-5 flex items-center'>
                 {openNav ? <AiFillCaretUp /> : <AiOutlineAlignLeft />}
             </div>
-            <aside className='w-72 py-8 sidebar-full-screen text-center flex flex-col h-[100vh] sticky top-0'>
+            <aside className='w-80 py-8 sidebar-full-screen text-center flex flex-col h-[100vh] sticky top-0'>
                 <div className='flex flex-col my-5'>
                     <h1 className="text-white text-2xl mb-5 ml-10 font-semibold text-left">The Shelter</h1>
                     {user?.email &&

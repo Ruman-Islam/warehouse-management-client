@@ -7,7 +7,7 @@ import './Banner.css';
 
 const Banner = () => {
     return (
-        <div className='flex flex-col md:flex-row h-[40vh] xl:h-[65vh] 2xl:h-[80vh] justify-center items-center w-4/5 mx-auto my-20 xl:mt-0'>
+        <div className='flex flex-col md:flex-row h-[60vh] xl:h-[65vh] 2xl:h-[80vh] justify-center items-center w-4/5 mx-auto my-20 xl:mt-0'>
             <div className='relative basis-3/6 md:mt-0 hidden md:block'>
                 <div className="flex justify-end xl:w-4/6 2xl:w-4/5">
                     <img className="w-full xl:w-4/6 2xl:w-4/5" src={img3} alt="" />

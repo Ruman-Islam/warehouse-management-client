@@ -40,7 +40,7 @@ const Pagination = ({
                             [...Array(totalPage).keys()]
                                 .map(pgNumber =>
                                     <button key={pgNumber}
-                                        className={`border p-2 hover:bg-blue-900 shadow-lg hover:text-white duration-100
+                                        className={`border px-3 mr-1 rounded-lg hover:bg-blue-900 shadow-lg hover:text-white duration-100
                                          ${pageNumber === pgNumber ? 'bg-blue-900 text-white' : ''}`}
                                         onClick={() => setPageNumber(pgNumber)}>
                                         {pgNumber + 1}

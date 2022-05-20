@@ -3,8 +3,8 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    /* background-color: var(--primary-color); */
-    background-color: rgba(0, 0, 0, 0.925);
+    background-color: var(--primary-color);
+    /* background-color: rgba(0, 0, 0, 0.925); */
 }
 
 .inner-container {

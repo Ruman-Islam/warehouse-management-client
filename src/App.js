@@ -16,6 +16,9 @@ import Blog from './components/Blog/Blog';
 import ResetPassword from './components/Login/ResetPassword';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+import UserSetting from './components/UserSetting/UserSetting';
+import UpdateProfile from './components/UserSetting/UpdateProfile';
+import UserProfile from './components/UserSetting/UserProfile';
 
 function App() {
   return (
@@ -26,7 +29,7 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/home' element={<Home />} />
             <Route path='/inventories' element={<Inventories />} />
-            <Route path='/inventoryDetail/:productId' element={
+            <Route path='/inventory-detail/:productId' element={
               <PrivateRoute>
                 <InventoryDetail />
               </PrivateRoute>
@@ -46,6 +49,15 @@ function App() {
             <Route path='/registration' element={<Registration />} />
             <Route path='/reset-password' element={<ResetPassword />} />
             <Route path='/blog' element={<Blog />} />
+            <Route path='/setting' element={
+              <PrivateRoute>
+                <UserSetting />
+              </PrivateRoute>
+            }>
+              <Route index element={<UserProfile />} />
+              <Route path='/setting/user-profile' element={<UserProfile />} />
+              <Route path='/setting/update-profile' element={<UpdateProfile />} />
+            </Route>
             <Route path='*' element={<NotFound />} />
           </Routes>
         </HelmetProvider>

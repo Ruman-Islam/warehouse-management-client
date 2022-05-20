@@ -7,12 +7,12 @@ import PageTitle from "../../../Shared/PageTitle/PageTitle";
 import Spinner from "../../../Shared/Spinner/Spinner";
 
 const Inventories = ({ isHome }) => {
-    const location = useLocation();
+    const { hash } = useLocation();
     const { products, isLoading } = UseGetProducts();
 
     return (
         <>
-            {location.pathname === '/inventories' && <Navbar />}
+            {hash.includes('#header') && <Navbar />}
             <div className='mt-5 py-5'>
                 <PageTitle title="Inventory" />
                 {isHome && <div className="text-center text-sm mb-10">
@@ -34,7 +34,7 @@ const Inventories = ({ isHome }) => {
                     </>
                 </div>
             </div> <br /><br /><br /><br />
-            {location.pathname === '/inventories' && <Footer />}
+            {hash.includes('#header') && <Footer />}
         </>
     );
 };

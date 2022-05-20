@@ -21,7 +21,7 @@ const Navbar = () => {
     const { handleSignOut } = UseSignOut();
 
     return (
-        <header className='w-full'>
+        <header id='header' className='w-full'>
             <nav className='background-color text-white flex justify-center'>
                 <div className='flex justify-between items-center h-12 xl:h-20 2xl:h-28 w-full md:w-2/3 lg:w-3/4 px-5'>
                     <h1 className='text-2xl md:text-3xl lg:text-4xl'>Shelter</h1>
@@ -32,7 +32,7 @@ const Navbar = () => {
                             <li onClick={() => navigate('/login')} className='text-lg cursor-pointer'>Login</li>
                         }
                         {user ? '' : <li onClick={() => navigate('/registration')} className='text-lg cursor-pointer'>Signup</li>}
-                        <li><AiFillSetting /> </li>
+                        <li className='cursor-pointer' onClick={() => navigate('/setting')}><AiFillSetting /> </li>
                     </ul>
                 </div>
             </nav>
@@ -42,17 +42,18 @@ const Navbar = () => {
                 </div>
             </nav>
             <nav
-                className={`background-color border border-l-0 border-r-0 border-b-0 border-t-1 text-white flex items-center ${navbar && 'fixed w-full z-10 top-0 scrolly-background-color primary-color shadow-lg'}`}>
+                id='navbar'
+                className={`border border-l-0 border-r-0 border-b-0 border-t-1 text-white flex items-center ${navbar ? 'md:fixed md:w-full md:z-10 scrolly-background-color primary-color top-0 shadow-lg' : 'background-color'}`}>
                 <ul className={`flex flex-col md:flex-row justify-center items-center py-2 w-full h-18 md:h-20 lg:h-12 absolute md:static ease-in duration-500 z-10 ${openNav ? 'top-20 nav' : 'top-[-200px]'}`}>
                     <li className='px-3 text-md font-semibold'>
                         <CustomLink to='/home'>Home</CustomLink>
                     </li>
                     <li className='px-3 text-md font-semibold'>
-                        <CustomLink to='/inventories'>Inventories</CustomLink>
+                        <CustomLink smooth to='/inventories/#header'>Inventories</CustomLink>
                     </li>
                     <li className='px-3 text-md font-semibold'>
                         <CustomLink to='/dashboard'>
-                            Manage Inventory
+                            Dashboard
                         </CustomLink>
                     </li>
                     <li className='px-3 text-md font-semibold'>

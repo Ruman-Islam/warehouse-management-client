@@ -6,9 +6,10 @@ import TopSeller from './TopSeller';
 const TopSellers = () => {
     const [topSellers, setTopSellers] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [changeState, setChangeState] = useState(false);
     useEffect(() => {
         setIsLoading(true);
-        const url = "https://protected-waters-02155.herokuapp.com/top-sellers";
+        const url = "http://localhost:5000/top-sellers";
         (async () => {
             try {
                 const { data } = await axios.get(url)
@@ -16,10 +17,11 @@ const TopSellers = () => {
                 setIsLoading(false);
             } catch (err) {
                 console.log(err);
+                setChangeState(!changeState);
                 setIsLoading(false);
             }
         })()
-    }, [])
+    }, [changeState])
     return (
         <>
             {isLoading ? <Spinner />

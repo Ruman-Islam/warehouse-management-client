@@ -43,7 +43,7 @@ const AddItem = () => {
                 notifyWarning('Opps! you missed description');
                 break;
             default:
-                await axios.post("https://protected-waters-02155.herokuapp.com/add-product", productInfo)
+                await axios.post("http://localhost:5000/add-product", productInfo)
                     .then(res => {
                         notifySuccess("Product successfully added ");
                         e.target.reset();
@@ -55,8 +55,8 @@ const AddItem = () => {
             <PageTitle title="Add Item" />
             <div className='w-full h-10 text-center text-slate-400 text-xs'>
                 {/* <img className='w-full h-full rounded-lg' src={formBackground} alt="" /> */}
-                <h1><span className='font-semibold'>Note:</span> *Every field is required. *Fill the stock field with yes or no</h1>
-                <h1>*Rating should not fractional number &amp; rate should not increase above 5</h1>
+                <h1><span className='font-semibold'>Note:</span> *Every field is required.</h1>
+                <h1>*Rating should not be fractional number</h1>
             </div>
             <form className='flex flex-col shadow-2xl bg-transparent p-5 rounded-lg' onSubmit={handleSubmit(onSubmit)}>
                 <input

@@ -13,9 +13,9 @@ import PageTitle from '../../Shared/PageTitle/PageTitle';
 const Home = () => {
     const navigate = useNavigate();
     return (
-        <div className='animation'>
+        <div>
             <div><Navbar /></div>
-            <div><Banner /></div><hr />
+            <div className='animation'><Banner /></div><hr />
             <div><Inventories isHome />
                 <PageTitle title="Home" />
                 <div className='w-full md:w-2/3 mx-auto text-center md:text-right'>
@@ -24,7 +24,8 @@ const Home = () => {
                         className='text-blue-800 text-sm'>
                         <div className='flex justify-end items-center'><AiOutlineDoubleRight /><span>Manage Inventories</span></div>
                     </button>
-                </div></div>
+                </div>
+            </div>
             <div><TopSellers /></div>
             <div><TopSellingProducts /></div>
             <div><About /></div>

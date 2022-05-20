@@ -6,7 +6,7 @@ import addressIcon from '../../../assets/images/icon_address.webp';
 const Footer = () => {
     const year = new Date().getFullYear();
     return (
-        <div className='bg-slate-100'>
+        <div id='footer' className='bg-slate-100'>
             <div className='background-color text-white flex flex-col md:flex-row justify-around items-center px-44 py-8 md:py-4'>
                 <div className='flex items-center flex-col md:flex-row'>
                     <div className='w-20 text-6xl ml-5 md:ml-0'><AiOutlineMail /></div>
@@ -88,7 +88,7 @@ const Footer = () => {
                 <p>Huawei</p> <span className='mx-1 font-semibold text-slate-500'> |</span>
                 <p>Zippo</p>
             </div>
-            <div className='ml-0 text-center md:text-left text-xs md:text-md md:ml-64 my-5'>Copyright ©{year} Ruman Islam. All rights reserved.</div>
+            <div className='ml-0 text-center md:text-left text-xs md:text-md md:ml-64 mt-5 pb-5'>Copyright ©{year} Ruman Islam. All rights reserved.</div>
         </div>
     );
 };

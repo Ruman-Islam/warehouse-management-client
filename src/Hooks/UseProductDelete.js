@@ -11,7 +11,7 @@ const UseProductDelete = (products, setProducts, changeState, setChangeState) =>
     } = UseNotify();
 
     const handleDelete = async productId => {
-        const url = `https://protected-waters-02155.herokuapp.com/delete-product/${productId}`;
+        const url = `http://localhost:5000/delete-product/${productId}`;
         try {
             Swal.fire({
                 title: "Are your sure?",

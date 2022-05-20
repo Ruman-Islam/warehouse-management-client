@@ -3,18 +3,20 @@ import React, { useEffect, useState } from 'react';
 
 const TopSellingProducts = () => {
     const [products, setProducts] = useState([]);
+    const [changeState, setChangeState] = useState(false);
 
     useEffect(() => {
-        const url = "https://protected-waters-02155.herokuapp.com/top-selling-products";
+        const url = "http://localhost:5000/top-selling-products";
         (async () => {
             try {
                 const { data } = await axios.get(url)
                 setProducts(data);
             } catch (err) {
+                setChangeState(!changeState);
                 console.log(err);
             }
         })()
-    }, [])
+    }, [changeState])
     return (
         <div className='w-2/3 my-20 mx-auto'>
             <h1 className='text-4xl text-center'>Top Selling Inventories</h1>

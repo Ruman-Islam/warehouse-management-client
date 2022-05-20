@@ -2,17 +2,22 @@ import React from 'react';
 import Rating from 'react-rating';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useNavigate } from 'react-router-dom';
-import './Product.css';
+import { NavHashLink } from 'react-router-hash-link';
 
-const Product = ({ product: { _id, img, productName, price, quantity, review, supplier } }) => {
-    const navigate = useNavigate();
+const Product = (
+    { product: {
+        _id, img,
+        productName, price,
+        quantity, review,
+        supplier } }
+) => {
 
     return (
-        <div className='rounded-b-lg overflow-hidden group shadow-lg max-w-sm upper-part'>
-            <img className='img-tag' src={img} alt="" />
-            <div
-                className='bg-white w-full rounded-b-lg text-black bottom-part flex justify-center items-center flex-col'>
+        <div className='shadow-lg w-full h-96 seller-info-card animation'>
+            <div className='w-full h-full product-img'>
+                <img className='w-full h-full object-cover' src={img} alt="" />
+            </div>
+            <div className='seller-detail text-white text-center'>
                 <p className='text-center font-semibold text-sm hover:text-sky-500'>{productName}</p>
                 <p className='text-center font-bold'>{'$'}{price}</p>
                 <p className='text-center'>
@@ -26,13 +31,13 @@ const Product = ({ product: { _id, img, productName, price, quantity, review, su
                         readonly>
                     </Rating>
                 </p>
-                <button
-                    onClick={() => navigate(`/inventoryDetail/${_id}`)}
+                <NavHashLink
+                    smooth to={`/inventory-detail/${_id}/#navbar`}
                     className='rounded px-5 md:px-10 py-1 mt-2 text-white text-sm font-bold background-color hover:bg-sky-500 duration-300'>
                     Manage
-                </button>
+                </NavHashLink>
             </div>
-        </div>
+        </div >
     );
 };
 

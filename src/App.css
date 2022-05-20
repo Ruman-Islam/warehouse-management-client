@@ -31,10 +31,6 @@
     flex: 1 !important;
 }
 
-body {
-    animation: transitionIn 0.75s;
-}
-
 .animation {
     animation: transitionIn 0.75s;
 }

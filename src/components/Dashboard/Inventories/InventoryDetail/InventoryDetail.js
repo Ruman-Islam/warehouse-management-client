@@ -20,7 +20,7 @@ const InventoryDetail = () => {
 
     useEffect(() => {
         setIsLoading(true);
-        const url = `https://protected-waters-02155.herokuapp.com/product/${productId}`;
+        const url = `http://localhost:5000/product/${productId}`;
         (async () => {
             try {
                 const { data } = await axios.get(url)
@@ -46,7 +46,7 @@ const InventoryDetail = () => {
         }
         if (quantity > 0 || inputQuantity) {
             newQuantity = isUpdate ? inputQuantity + currentQuantity : currentQuantity - 1;
-            const url = `https://protected-waters-02155.herokuapp.com/product/${id}`;
+            const url = `http://localhost:5000/product/${id}`;
             (async () => {
                 try {
                     const { data } = await axios.put(url, { newQuantity })
@@ -65,7 +65,7 @@ const InventoryDetail = () => {
             <Navbar />
             {isLoading ? <Spinner />
                 :
-                <div>
+                <div id='inventory-detail'>
                     <div className='grid grid-cols-1 md:grid-cols-2 w-2/3 mx-auto my-10 md:my-20 animation'>
                         <div className='border border-slate-200 rounded'>
                             <img className='w-full' src={product.img} alt="" />

@@ -21,11 +21,11 @@ const UseGetProducts = (message) => {
 
     let url;
     if (message === 'my-items') {
-        url = `https://protected-waters-02155.herokuapp.com/products-user?email=${user?.email}&limit=${limit}&pageNumber=${pageNumber}`;
+        url = `http://localhost:5000/products-user?email=${user?.email}&limit=${limit}&pageNumber=${pageNumber}`;
     } else if (message === 'inventory-list') {
-        url = `https://protected-waters-02155.herokuapp.com/products?limit=${limit}&pageNumber=${pageNumber}}`;
+        url = `http://localhost:5000/products?limit=${limit}&pageNumber=${pageNumber}}`;
     } else {
-        url = "https://protected-waters-02155.herokuapp.com/products";
+        url = "http://localhost:5000/products";
     }
 
     useEffect(() => {
@@ -39,6 +39,10 @@ const UseGetProducts = (message) => {
                 })
                 if (message === 'inventory-list') {
                     if (data.success) {
+                        data.products.sort((a, b) => {
+                            if (a.productName < b.productName) { return -1 }
+                            if (b.productName > a.productName) { return 1 }
+                        })
                         setProducts(data.products);
                         setTotalProductCount(data.count);
                         setTotalPage(Math.ceil(data.count / limit));
@@ -47,6 +51,10 @@ const UseGetProducts = (message) => {
                     }
                 } else if (message === 'my-items') {
                     if (data.success) {
+                        data.products.sort((a, b) => {
+                            if (a.productName < b.productName) { return -1 }
+                            if (b.productName > a.productName) { return 1 }
+                        })
                         setProducts(data.products);
                         setUserTotalProducts(data.count);
                         setTotalPage(Math.ceil(data.count / limit));
@@ -55,12 +63,22 @@ const UseGetProducts = (message) => {
                     }
                 } else {
                     setIsLoading(false);
+                    data.products.sort((a, b) => {
+                        if (a.productName < b.productName) { return -1 }
+                        if (b.productName > a.productName) { return 1 }
+                    })
                     setProducts(data.products);
                 }
             } catch (err) {
+                console.log(err);
                 setIsLoading(false);
                 if (err.response.status === 404) {
                     setError(err.response?.data?.message)
+                    return;
+                }
+                if (err.response?.statusText === 'Not found') {
+                    setError(err.response?.statusText)
+                    setChangeState(!changeState);
                     return;
                 }
                 if (err.response.status === 403 || err.response.status === 401) {
